@@ -1,0 +1,17 @@
+Presidenciais
+16/06/2022
+16/06/2022
+/resources/presidenciais.png
+true
+-
+Gonçalo Costa,15814064,false,24/01/2003,/resources/costa.jpeg,M
+Diogo David,12345678,true,24/01/2003,/resources/diogo.jpeg,F
+*
+Marcelo Rebelo de Sousa,MRS,/resources/MRS.jpg
+André Ventura,AV,/resources/AV.jpg
+.
+0
+MRS:0
+AV:0
+VB:0
+Empate

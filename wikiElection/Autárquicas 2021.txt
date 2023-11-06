@@ -1,0 +1,118 @@
+Autárquicas 2021
+16/06/2022
+16/06/2022
+/resources/elections.png
+true
+-
+Gonçalo Costa,15814064,true,24/01/2003,/resources/costa.jpeg,M
+Rodrigo Canejo,30260660,false,16/06/1984,/resources/male_38_eb28947176221d7139c50294f95b640363da680b.jpg,M
+Salvador Alvarenga,26885603,false,16/06/1994,/resources/male_28_d884865cf42d4f63fea16e1957b4bb550e1798eb.jpg,M
+Rafael Canela,28363545,false,16/06/1995,/resources/male_27_56b76f54c92e471f2baf533d5ac8d8bd0dd38f72.jpg,M
+Gustavo Amaral,81604008,false,16/06/1982,/resources/male_40_95cef3fd7073620ed9766754f21490d9da28c55c.jpg,M
+Guilherme Candal,27688750,false,16/06/1961,/resources/male_61_623787f186cfa7d2f9ae1565b05b24fdac96c7c2.jpg,M
+Luís Camelo,50760642,false,16/06/1976,/resources/male_46_1b701ae69567090c16e7548b6107f50e68284f0d.jpg,M
+Gabriel Alvarenga,48406998,false,16/06/1989,/resources/male_33_90a494aa8504fbd25f4718156019137d5f14765d.jpg,M
+Vasco Camilo,37080123,false,16/06/1978,/resources/male_44_4721e2d7ea587c1dd8199c2bf4e36a8808248806.jpg,M
+Henrique Caneira,32890163,false,16/06/1997,/resources/male_25_de733d1d9c1216e408903e2cb93108a426274769.jpg,M
+Diego Atilano,50893226,false,16/06/1988,/resources/male_34_956d3e8cd34a0d7627f9bfe69d2c459a0af9f95f.jpg,M
+Ricardo Alvelos,70490900,false,16/06/1985,/resources/male_37_f8b7c74e24d0a3857a6424d3bf30e1a33ae8aed9.jpg,M
+Filipe Arruda,13365927,false,16/06/1978,/resources/male_44_8e0b78fefcb6ff43816419756b914124ade2c1a5.jpg,M
+Mateus Cangueiro,48255638,false,16/06/1960,/resources/male_62_22492793f63235403ffc979bf9b719b3c80f911d.jpg,M
+Santiago Campelo,89713409,false,16/06/1966,/resources/male_56_de04479d7357abca3da1380900bbb5f217e2ecfa.jpg,M
+Henrique Camarinho,30058175,false,16/06/1987,/resources/male_35_0b4d05034f56203f059005cb0212979176d9cbf8.jpg,M
+Salvador Arruda,18694975,false,16/06/1981,/resources/male_41_55aaebc2cc87f84dea66e55569470adbee8490f2.jpg,M
+Ricardo Amaral,76964223,false,16/06/1981,/resources/male_41_3ba57ff1a47fcf5ff4582b868b2d9b96d7d954fd.jpg,M
+Matias Canto,80604007,false,16/06/1992,/resources/male_30_9b3499ff15ecd3c56a6672ab570177428ae6a58f.jpg,M
+Bernardo Camelo,35383761,false,16/06/1973,/resources/male_49_8006a765574ef6597f54a42070b2ae3d6530bdc5.jpg,M
+Samuel Camelo,32151452,false,16/06/1981,/resources/male_41_252c217a2d0e17a8c0f892a25252aa4c06ed9c47.jpg,M
+António Canhão,30569774,false,16/06/1972,/resources/male_50_5b0ef7c9c0e515c2a453596f55b563d3ef113bb5.jpg,M
+Isaac Canedo,77858945,false,16/06/1998,/resources/male_24_84bffb6b522f3a13e2cb592ddd5f675d4bfc7063.jpg,M
+Diego Camarinho,18384833,false,16/06/1974,/resources/male_48_109d947a267462b5f57c97a35dc69fec5b799f2c.jpg,M
+Rodrigo Camarinho,93500502,false,16/06/2003,/resources/male_19_fb75e4b08ec166265696e76249c44f125fc5f12e.jpg,M
+Rafael Canhão,71893147,false,16/06/1985,/resources/male_37_bff5f326c18527db87206800b330794e2b59bbad.jpg,M
+Mariana Cancela,23850440,false,16/06/1972,/resources/female_50_e5e152720f3d00db9913eb1cfae06ca4b7c4a310.jpg,F
+Yasmin Canto,43064345,false,16/06/1981,/resources/female_41_b5217b4ee78bf281bb486ae46d069398284e19a1.jpg,F
+Yara Canela,40984245,false,16/06/1965,/resources/female_57_33c5f7e41a4a4c4e9597b0f29bbc41249c5d2835.jpg,F
+Valentina Alvim,44105731,false,16/06/2004,/resources/female_18_bb05d6c791575fbc7ab529a67ae7f393f8e037da.jpg,F
+Lara Álvares,99796415,false,16/06/1972,/resources/female_50_e0d262e3d990ad74b1f96576e06437d1acb69d93.jpg,F
+Rafaela Candeias,82539155,false,16/06/1991,/resources/female_31_f44c0bdd47c8efab1bf10c9c07133b37966b0d58.jpg,F
+Gabriela Amaral,21960771,false,16/06/1999,/resources/female_23_b06c83abe9f46b5899d20edc43b5a6291e70189c.jpg,F
+Alícia Álvares,40045455,false,16/06/1992,/resources/female_30_8a50e6d13748ab9923090a714c08fd92b642c92c.jpg,F
+Yasmin Cancela,19433880,false,16/06/1977,/resources/female_45_fe9e5935a65ccbabde1f1cc5439945d3f7ac2678.jpg,F
+Alícia Caniça,50275286,false,16/06/1992,/resources/female_30_7555a33de0c1757871540f5349a915c21bceb505.jpg,F
+Matilde Avelar,26623113,false,16/06/1988,/resources/female_34_5104badff45692adc7282e5af42074b490e2652c.jpg,F
+Marta Azenha,47700977,false,16/06/2000,/resources/female_22_4c03fd0eeb1588b1926766441de8384359a44564.jpg,F
+Camila Canela,62224482,false,16/06/1998,/resources/female_24_dd33f421c33842b966fc869eda7833b3fdc991ab.jpg,F
+Catarina Assunção,12304607,false,16/06/1981,/resources/female_41_7a109015b12cbcfc218ec098737993aca1b97589.jpg,F
+Valentina Azevedo,60650420,false,16/06/1990,/resources/female_32_8f14feac6ae444550d27426cfdfa68d185f230e6.jpg,F
+Ana Baía,33896728,false,16/06/1991,/resources/female_31_4a1aec9d420619efe0fd0746722c4f5fb6efe01b.jpg,F
+Laura Canadas,90511982,false,16/06/1993,/resources/female_29_b67ee037c6a11b9836cd1c151fe979b69e32b13f.jpg,F
+Mara Canejo,26526722,false,16/06/1974,/resources/female_48_bfe4390e6d2c52dcdbc28df1ea5081293d3b258c.jpg,F
+Margarida Canadas,60421649,false,16/06/1986,/resources/female_36_170a499ffbc176317b18016a2d891a4d4c9a2705.jpg,F
+Eva Camelo,63661819,false,16/06/1981,/resources/female_41_90e850d65ae41199092c57437c9b2dd736569651.jpg,F
+Matilde Caniça,47309731,false,16/06/1989,/resources/female_33_acbc3cd5bbc488b8f01a53ef26300aafe005eaaf.jpg,F
+Rafaela Caminha,56165036,false,16/06/1999,/resources/female_23_52eb70a6ead775c73f412e5b6d5bf54d953d532d.jpg,F
+Mara Alvim,90142590,false,16/06/1993,/resources/female_29_6fd94087224edeffafc3fc557a666f25ae5ee986.jpg,F
+Clara Alves,86676756,false,16/06/1995,/resources/female_27_9d1b8cfd26cb1ce4259a8bc6e87837395881ca8d.jpg,F
+Luana Camilo,88286102,false,16/06/1995,/resources/female_27_af015bde963a86151c562905bfa1823c92824118.jpg,F
+Tomás Alvim,98687609,false,16/06/1983,/resources/male_39_7cb980e3fdc2bcdc662c9e56ce1930bcc0e2a59c.jpg,M
+Artur Azevedo,96804531,false,16/06/1991,/resources/male_31_c978f63d65b4afda9d158910ccaaa669b89c332a.jpg,M
+Pedro Alves,82610342,false,16/06/1985,/resources/male_37_975f0060065d7be3a61534b15f89155187e1d2e8.jpg,M
+Kevin Abranches,41131703,false,16/06/1992,/resources/male_30_94fafabf52e381fc9342d799a6ca25b420552169.jpg,M
+Pedro Alpuim,39175984,false,16/06/1981,/resources/male_41_d8846982342664fe2121b5aa82efbf8180e8560a.jpg,M
+Santiago Bacelar,35754734,false,16/06/1984,/resources/male_38_aba449637eb19a0a0999b5c2e8ae02fdd9748f37.jpg,M
+Gonçalo Canto,95575541,false,16/06/1982,/resources/male_40_fc52458df58fedb49f4a1cf0f1893c4e517c78bc.jpg,M
+Luís Amaral,73014696,false,16/06/1971,/resources/male_51_3cea438e9621dc92a83457bd1b3b492c9894fd8b.jpg,M
+Diogo Camargo,90019982,false,16/06/1977,/resources/male_45_87b7d73a280588c05312d563dac76d6c37d5afaf.jpg,M
+Santiago Camilo,52498164,false,16/06/2001,/resources/male_21_b562efbde2194c281f2c74147ee2eba92ddfeb53.jpg,M
+Santiago Camilo,34139495,false,16/06/1986,/resources/male_36_eee48f8c1005ae6342237ee99f71720e9f1dc76d.jpg,M
+José Alvim,34477959,false,16/06/1968,/resources/male_54_b666b33c8f301c1def47111cb042d38d62be07e9.jpg,M
+Luís Azambuja,46632172,false,16/06/1977,/resources/male_45_423440212fd2690a2d57d642a1306d41dbfdf70e.jpg,M
+Lucas Avelar,88575006,false,16/06/1982,/resources/male_40_0948cd591c95a31ff73193b3403d744cade8c470.jpg,M
+Leandro Alves,42074636,false,16/06/1988,/resources/male_34_503148dc3fdaedf8c5ab86874526669a08f1996b.jpg,M
+Gonçalo Arruda,62859444,false,16/06/1988,/resources/male_34_b595615d7116a84ead9c0736fd5e9328f3b6cbc0.jpg,M
+Afonso Caminha,45707628,false,16/06/1993,/resources/male_29_b209fa4b532c1cdb3e0d502b8e4e0b8fcfacc347.jpg,M
+Pedro Caneira,93085447,false,16/06/1977,/resources/male_45_95fd8e36dbceb9ccc4fd147ec8ab941f9c875cdb.jpg,M
+Martim Alves,24985020,false,16/06/1983,/resources/male_39_3faa95ce767d5a8db19837794e8a4c2e54fe2865.jpg,M
+Diego Atilano,59989140,false,16/06/1979,/resources/male_43_fb11c41a79d27dbd911678a40bd7b0c4ab674a7a.jpg,M
+David Alvarenga,78572122,false,16/06/1986,/resources/male_36_23659256accc0c7f0f7dbb2748c4751e1b993606.jpg,M
+Enzo Aveiro,23169380,false,16/06/1977,/resources/male_45_1bc9b87ff9d84c9836de21f0dd7087bf4ed52a6a.jpg,M
+Samuel Campos,98174976,false,16/06/1991,/resources/male_31_bc3ba325d12b7216f888a55c762ad72c9f3db6e0.jpg,M
+Mateus Canadas,41030392,false,16/06/1990,/resources/male_32_28ceee883f4012043b11a5987b9e9a47ed98f6cf.jpg,M
+Kevin Caminha,86303126,false,16/06/2003,/resources/male_19_eca58a2d20c4e04a1601afeb4b60ba815d2b0386.jpg,M
+Beatriz Almeida,53401884,false,16/06/1987,/resources/female_35_b3d0deb2ff93f341bb0c13aef9899989d5491575.jpg,F
+Teresa Arruda,61579229,false,16/06/1965,/resources/female_57_bfd8fc3db3a0253178228b22f518222566093e94.jpg,F
+Marta Assunção,67833601,false,16/06/1984,/resources/female_38_10bc49b029db5c3c1ee935209212ee7d1631dbb4.jpg,F
+Matilde Azambuja,11531789,false,16/06/1988,/resources/female_34_ca32e3534a4b58889b77d9908f37fb15b615b849.jpg,F
+Ana Cantanhede,23635623,false,16/06/1971,/resources/female_51_3e8d7cf0eba3e1b85a86dbf759404f0fc6418a5d.jpg,F
+Francisca Avelar,84969420,false,16/06/1994,/resources/female_28_711f1007b3663586224ae4960d6926051b291afd.jpg,F
+Ema Azambuja,87649775,false,16/06/1996,/resources/female_26_b7399952bab8f9d7dfc30d3a61e99456182b7676.jpg,F
+Ana Canário,97662628,false,16/06/1994,/resources/female_28_099291a0816ea7475c066527d30702816e794b06.jpg,F
+Luísa Caneira,95600244,false,16/06/1989,/resources/female_33_3b4751576c9d77840970f4741d3f549f2be7478b.jpg,F
+Carlota Canhão,36012073,false,16/06/1987,/resources/female_35_002f46e6459158f66e3145bf50f66d2b08923b1b.jpg,F
+Carminho Canejo,87277375,false,16/06/1992,/resources/female_30_1eb732c55de65019728c1671bc48d5f5f3939196.jpg,F
+Constança Caneira,26767091,false,16/06/1988,/resources/female_34_2c0da28bedb65e4334ec64ff9ab9ab2d70c0bfde.jpg,F
+Carlota Camargo,14699787,false,16/06/1986,/resources/female_36_b86ca1ea43debb8a9a46684ff3ecd427271e54a6.jpg,F
+Yara Azeredo,58045196,false,16/06/1979,/resources/female_43_741ea68314965bb604b3cd703363ce00b5848e38.jpg,F
+Victória Ávila,74013886,false,16/06/1988,/resources/female_34_0171a9722281a68c662567561db4b6a2954ef242.jpg,F
+Gabriela Camargo,33924518,false,16/06/1994,/resources/female_28_960e21742ed925d6686abb84e7fcde938da11e04.jpg,F
+Lara Alvelos,91418696,false,16/06/1977,/resources/female_45_fac6589357d5cffc86b3f33e4303557b6da0d798.jpg,F
+Constança Cambezes,26883169,false,16/06/1974,/resources/female_48_f5cd6686d52f5ae07be934e964edf8c7a31b998a.jpg,F
+Carolina Canedo,96327134,false,16/06/1991,/resources/female_31_189a4d06d3de9b5762aa5b305afa30815affab65.jpg,F
+Diana Caniça,45148074,false,16/06/1980,/resources/female_42_57a981a4ff28bbb6d6abc26e6fcb528d70d29f1d.jpg,F
+Sara Alvelos,79407259,false,16/06/1985,/resources/female_37_b3715539fd7e25e3651437950166f35c410609ce.jpg,F
+Eva Azenha,20742645,false,16/06/1997,/resources/female_25_09acd3efc55c512f997e55197050811418a234ba.jpg,F
+Beatriz Ávila,91379076,false,16/06/1994,/resources/female_28_21cde028996e639974db3caf9d3c14a259bc3fd0.jpg,F
+Júlia Ataíde,38107884,false,16/06/2001,/resources/female_21_ac7746b647d4377bd1e8164d525171dfc9681ce3.jpg,F
+Yara Álvaro,10837738,false,16/06/1992,/resources/female_30_5194a36f7a1b6772efb2d0f97ae6e2962b00069b.jpg,F
+*
+Partido Socialista,PS,/resources/PS.png
+CDS - PP,CDS,/resources/CDS.png
+CHEGA,CHEGA,/resources/CH.png
+.
+1
+PS:0
+CDS:0
+CHEGA:1
+VB:0
+CHEGA

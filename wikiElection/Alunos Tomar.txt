@@ -1,0 +1,19 @@
+Alunos Tomar
+14/06/2022
+17/06/2022
+/resources/aePorto.png
+true
+-
+Gonçalo Costa,15814064,false,24/01/2003,/resources/costa.jpeg,M
+César Cadaval,46229653,false,14/06/1971,/resources/male_51_86e444f1f2be3508b8b8c8f57f94af54d7ac218a.jpg,M
+Marco Arruda,83535341,false,14/06/1972,/resources/male_50_d8d349837f8c42959adcd87f64f87ad2f6a7e7b8.jpg,M
+Armando Bento,71616202,false,14/06/1983,/resources/male_39_0399991e1299d41ef0e858cd3054b20240882271.jpg,M
+Anderson Carvalhal,25525251,false,14/06/1984,/resources/male_38_7725edadf183373acce0ed54744cebdfadc30d09.jpg,M
+Leonardo Ávila,57863866,false,14/06/1972,/resources/male_50_8136438f2afe16efec2d4b9630036df83298f9ea.jpg,M
+*
+Andre Ventura,AV,/resources/AV.jpg
+.
+0
+AV:0
+VB:0
+Empate

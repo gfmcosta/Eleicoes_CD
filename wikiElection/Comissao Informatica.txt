@@ -1,0 +1,63 @@
+Comissao Informatica
+06/11/2023
+07/11/2023
+/resources/mockup_bandeira.png
+true
+-
+Leandro Candeias,44853705,true,06/11/0063,/resources/defaultMale.png,M
+Henrique Cancela,51724188,false,06/11/0032,/resources/defaultMale.png,M
+Diego Abranches,52558449,false,06/11/0061,/resources/defaultMale.png,M
+Vasco Canejo,97915187,false,06/11/0034,/resources/defaultMale.png,M
+André Álvaro,83117693,false,06/11/0060,/resources/defaultMale.png,M
+Alexandre Canejo,35471456,false,06/11/0060,/resources/defaultMale.png,M
+André Ávila,38628246,false,06/11/0021,/resources/defaultMale.png,M
+Rodrigo Caneira,46143992,false,06/11/0026,/resources/defaultMale.png,M
+Miguel Campos,46700004,true,06/11/0047,/resources/defaultMale.png,M
+Vicente Canadas,54689407,false,06/11/0043,/resources/defaultMale.png,M
+David Álvares,28529400,true,06/11/0071,/resources/defaultMale.png,M
+António Avelar,46418031,false,06/11/0041,/resources/defaultMale.png,M
+Alexandre Ávila,63381750,false,06/11/0047,/resources/defaultMale.png,M
+Francisco Cantanhede,90134838,false,06/11/0020,/resources/defaultMale.png,M
+Vicente Caneira,41680849,false,06/11/0050,/resources/defaultMale.png,M
+Filipe Canhão,85497891,false,06/11/0047,/resources/defaultMale.png,M
+Luís Cambezes,54361120,false,06/11/0044,/resources/defaultMale.png,M
+Luís Almeida,21389880,false,06/11/0059,/resources/defaultMale.png,M
+João Alvarenga,18171912,false,06/11/0060,/resources/defaultMale.png,M
+Leandro Abrantes,76848841,false,06/11/0054,/resources/defaultMale.png,M
+Duarte Baía,67941191,false,06/11/0071,/resources/defaultMale.png,M
+António Baía,83772050,false,06/11/0067,/resources/defaultMale.png,M
+Duarte Álvaro,56462141,false,06/11/0052,/resources/defaultMale.png,M
+Lucas Candal,86049311,false,06/11/0061,/resources/defaultMale.png,M
+Diogo Ávila,17523658,false,06/11/0059,/resources/defaultMale.png,M
+Beatriz Alvarenga,58538314,false,06/11/0063,/resources/defaultFemale.png,F
+Rita Caniça,21298158,false,06/11/0041,/resources/defaultFemale.png,F
+Carlota Amaral,95771862,false,06/11/0022,/resources/defaultFemale.png,F
+Diana Cancela,38641159,false,06/11/0050,/resources/defaultFemale.png,F
+Yara Baía,84206316,false,06/11/0065,/resources/defaultFemale.png,F
+Benedita Abelho,76223668,false,06/11/0028,/resources/defaultFemale.png,F
+Rafaela Bacelar,50053810,false,06/11/0069,/resources/defaultFemale.png,F
+Victória Caneira,66447622,false,06/11/0061,/resources/defaultFemale.png,F
+Rita Azeredo,24099837,false,06/11/0047,/resources/defaultFemale.png,F
+Alícia Canejo,10474562,false,06/11/0054,/resources/defaultFemale.png,F
+Bianca Canário,13256299,false,06/11/0049,/resources/defaultFemale.png,F
+Teresa Azenha,85211172,false,06/11/0056,/resources/defaultFemale.png,F
+Teresa Alves,26666787,false,06/11/0025,/resources/defaultFemale.png,F
+Camila Candal,96564873,false,06/11/0040,/resources/defaultFemale.png,F
+Alícia Azevedo,66959180,false,06/11/0065,/resources/defaultFemale.png,F
+Camila Caneira,88270657,false,06/11/0042,/resources/defaultFemale.png,F
+Matilde Amaral,35920242,false,06/11/0031,/resources/defaultFemale.png,F
+Camila Candeias,67809581,false,06/11/0069,/resources/defaultFemale.png,F
+Mariana Ataíde,38470748,false,06/11/0045,/resources/defaultFemale.png,F
+Joana Ataíde,77077487,false,06/11/0051,/resources/defaultFemale.png,F
+Carminho Avelar,29991500,false,06/11/0056,/resources/defaultFemale.png,F
+Yasmin Camarinho,71919561,false,06/11/0060,/resources/defaultFemale.png,F
+Letícia Alvarenga,93613700,false,06/11/0058,/resources/defaultFemale.png,F
+Carlota Atilano,33353233,false,06/11/0072,/resources/defaultFemale.png,F
+Joana Campelo,11291190,false,06/11/0068,/resources/defaultFemale.png,F
+*
+NEEI,NEEI,/resources/logo final.png
+.
+3
+NEEI:2
+VB:1
+NEEI
