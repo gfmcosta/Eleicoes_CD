@@ -28,7 +28,7 @@ public class Results extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         int totalElector=0;
-        File f = new File(System.getProperty("user.dir") + "\\wikiElection\\"+Global.eleitoralSearch.getName()+".txt");
+        File f = new File(System.getProperty("user.dir") + File.separator + "wikiElection" + File.separator + Global.eleitoralSearch.getName()+".txt");
         //open and read file
             try{
                 FileReader fr = new FileReader(f);

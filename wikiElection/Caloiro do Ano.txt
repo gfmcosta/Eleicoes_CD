@@ -1,0 +1,65 @@
+Caloiro do Ano
+28/11/2023
+29/11/2023
+/resources/logo final.png
+true
+-
+Afonso Azeredo,32020189,false,28/11/0056,/resources/defaultMale.png,M
+Manuel Canejo,46354466,false,28/11/0063,/resources/defaultMale.png,M
+Daniel Azeredo,25634914,false,28/11/0065,/resources/defaultMale.png,M
+Martim Canedo,16236708,false,28/11/0038,/resources/defaultMale.png,M
+Simão Ávila,30294487,false,28/11/0027,/resources/defaultMale.png,M
+Manuel Ataíde,73121420,false,28/11/0049,/resources/defaultMale.png,M
+Pedro Alvarenga,74028217,false,28/11/0064,/resources/defaultMale.png,M
+Rodrigo Camarinho,53945353,false,28/11/0052,/resources/defaultMale.png,M
+Bernardo Canadas,44477748,false,28/11/0055,/resources/defaultMale.png,M
+Duarte Almeida,79422886,true,28/11/0022,/resources/defaultMale.png,M
+Santiago Amado,25703658,false,28/11/0021,/resources/defaultMale.png,M
+Luís Álvaro,48923780,true,28/11/0052,/resources/defaultMale.png,M
+Tomás Abelho,45559425,false,28/11/0062,/resources/defaultMale.png,M
+Gonçalo Cambezes,16630267,false,28/11/0033,/resources/defaultMale.png,M
+Rodrigo Assunção,50706142,true,28/11/0033,/resources/defaultMale.png,M
+Eduardo Assunção,99324659,false,28/11/0049,/resources/defaultMale.png,M
+Salvador Cangueiro,21054442,false,28/11/0027,/resources/defaultMale.png,M
+Leandro Amaral,53855466,false,28/11/0034,/resources/defaultMale.png,M
+Filipe Alpuim,33505933,false,28/11/0035,/resources/defaultMale.png,M
+André Canejo,20628616,false,28/11/0045,/resources/defaultMale.png,M
+Matias Canejo,13130326,false,28/11/0060,/resources/defaultMale.png,M
+Rafael Alves,41251508,false,28/11/0022,/resources/defaultMale.png,M
+Bernardo Atilano,25888985,false,28/11/0051,/resources/defaultMale.png,M
+Isaac Camarinho,20910485,false,28/11/0032,/resources/defaultMale.png,M
+Pedro Alvarenga,27289017,false,28/11/0022,/resources/defaultMale.png,M
+Eva Alvim,17563522,false,28/11/0055,/resources/defaultFemale.png,F
+Rita Azeredo,99693578,false,28/11/0035,/resources/defaultFemale.png,F
+Yara Assunção,41234430,false,28/11/0052,/resources/defaultFemale.png,F
+Clara Ataíde,96498142,false,28/11/0046,/resources/defaultFemale.png,F
+Carlota Canhão,72447566,false,28/11/0044,/resources/defaultFemale.png,F
+Yasmin Canadas,74329905,false,28/11/0040,/resources/defaultFemale.png,F
+Yasmin Azambuja,61619539,false,28/11/0029,/resources/defaultFemale.png,F
+Rita Abranches,99918684,false,28/11/0073,/resources/defaultFemale.png,F
+Teresa Canedo,24282704,false,28/11/0029,/resources/defaultFemale.png,F
+Carolina Cantanhede,83999750,false,28/11/0070,/resources/defaultFemale.png,F
+Rafaela Álvares,13284533,false,28/11/0070,/resources/defaultFemale.png,F
+Matilde Camarinho,26441794,false,28/11/0034,/resources/defaultFemale.png,F
+Carminho Assis,44400327,false,28/11/0063,/resources/defaultFemale.png,F
+Luísa Azevedo,95214583,false,28/11/0034,/resources/defaultFemale.png,F
+Benedita Arruda,11788071,false,28/11/0052,/resources/defaultFemale.png,F
+Victória Canário,83763316,false,28/11/0055,/resources/defaultFemale.png,F
+Gabriela Abrantes,58412660,false,28/11/0067,/resources/defaultFemale.png,F
+Carolina Álvaro,71190229,false,28/11/0026,/resources/defaultFemale.png,F
+Kyara Assis,30262517,false,28/11/0022,/resources/defaultFemale.png,F
+Clara Ávila,52454342,false,28/11/0051,/resources/defaultFemale.png,F
+Ariana Camilo,83602282,false,28/11/0036,/resources/defaultFemale.png,F
+Letícia Aveiro,68229793,false,28/11/0058,/resources/defaultFemale.png,F
+Carlota Abrantes,77254364,false,28/11/0060,/resources/defaultFemale.png,F
+Júlia Amaral,62583369,true,28/11/0068,/resources/defaultFemale.png,F
+Teresa Azevedo,25101194,false,28/11/0056,/resources/defaultFemale.png,F
+*
+David Antao,DA,/resources/defaultMale.png
+Rui Dias,RD,/resources/defaultMale.png
+.
+4
+DA:2
+RD:1
+VB:1
+David Antao

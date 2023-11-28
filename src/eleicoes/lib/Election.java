@@ -20,18 +20,19 @@ public class Election {
     ArrayList<Candidate> candidate = new ArrayList<Candidate>();
     ArrayList<String> votes = new ArrayList<String>();
     boolean finished=false;
+    //Blockchain bc
     
     /**
      *
-     */
-    public Election(){
-    
+     */    public Election() {
+         //inicializar Blockchain
+         
     }
-    
-    /** 
-    * Get and returns an array of electors
-    * @return elector - elector array
-    */
+
+    /**
+     * Get and returns an array of electors
+     * @return elector - elector array
+     */
     // Encapsulamento -- Acesso aos atributos (GET)
     public ArrayList<Person> getElector() {
         return elector;

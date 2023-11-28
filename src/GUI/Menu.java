@@ -337,7 +337,10 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
         //get the number of files into wikiElection
-        int numbFiles = new File(System.getProperty("user.dir") + "\\wikiElection").list().length;
+        String path = System.getProperty("user.dir") + File.separator + "wikiElection";
+        File folder = new File(path);
+        File[] files = folder.listFiles();
+        int numbFiles = files.length;
         if(numbFiles==0){
             //is not created yet
             JOptionPane.showMessageDialog(null, "Ainda não foi criado nenhuma Eleição", "Atenção", JOptionPane.WARNING_MESSAGE);
@@ -421,7 +424,8 @@ public class Menu extends javax.swing.JFrame {
             //election exist
             Person add = new Person();
             //apelidos list
-            File f = new File(System.getProperty("user.dir") + "\\db\\apelidos.csv");
+            String path = System.getProperty("user.dir") + File.separator + "db" + File.separator + "apelidos.csv";
+            File f = new File(path);            
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
             //save all lines in array
@@ -432,7 +436,8 @@ public class Menu extends javax.swing.JFrame {
             fr.close();
             
             //male name list
-            f = new File(System.getProperty("user.dir") + "\\db\\nomesmasculino.csv");
+            path = System.getProperty("user.dir") + File.separator + "db" + File.separator + "nomesmasculino.csv";
+            f = new File(path);
             fr = new FileReader(f);
             br = new BufferedReader(fr);
             //save all lines in array
@@ -443,7 +448,8 @@ public class Menu extends javax.swing.JFrame {
             fr.close();
             
             //female name list
-            f = new File(System.getProperty("user.dir") + "\\db\\nomesfeminino.csv");
+            path = System.getProperty("user.dir") + File.separator + "db" + File.separator + "nomesfeminino.csv";
+            f = new File(path);
             fr = new FileReader(f);
             br = new BufferedReader(fr);
             //save all lines in array
@@ -517,7 +523,7 @@ public class Menu extends javax.swing.JFrame {
         //save all info in ficheiros
         try {
             //create new file
-            String newFileName = System.getProperty("user.dir") + "\\wikiElection\\"+Global.eleitoral.getName()+".txt";
+            String newFileName = System.getProperty("user.dir") + File.separator + "wikiElection" + File.separator + Global.eleitoral.getName()+".txt";
             new File(newFileName).createNewFile();
             //write log in file
             FileWriter writer = new FileWriter(newFileName);

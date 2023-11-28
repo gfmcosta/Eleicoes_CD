@@ -47,9 +47,11 @@ public class ResultList extends javax.swing.JDialog {
         JSeparator j2;
         int y=0;
         initComponents();
-        File folder = new File(System.getProperty("user.dir") + "\\wikiElection");
+        String path = System.getProperty("user.dir") + File.separator + "wikiElection";
+        File folder = new File(path);
+        File[] files = folder.listFiles();
         //open all files and real necessary information to create the menu dynamically
-        for (File f : folder.listFiles()) {
+        for (File f : files) {
             try{
                 FileReader fr = new FileReader(f);
                 BufferedReader br = new BufferedReader(fr);
