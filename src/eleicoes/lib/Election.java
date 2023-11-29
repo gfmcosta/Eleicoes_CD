@@ -12,21 +12,25 @@ import java.util.Date;
  * @author Costa
  */
 public class Election {
-    String name="";
-    Date dataI=new Date();
-    Date dataF=new Date();
-    String image="";
-    ArrayList<Person> elector = new ArrayList<Person>();
-    ArrayList<Candidate> candidate = new ArrayList<Candidate>();
-    ArrayList<String> votes = new ArrayList<String>();
-    boolean finished=false;
+    String name;
+    Date dataI;
+    Date dataF;
+    String image;
+    ArrayList<Person> elector;
+    ArrayList<Candidate> candidate;
+    ArrayList<String> votes;
+    boolean finished;
     //Blockchain bc
-    
-    /**
-     *
-     */    public Election() {
-         //inicializar Blockchain
-         
+
+    public Election() {
+        this.name = "";
+        this.dataI = new Date();
+        this.dataF = new Date();
+        this.image = "";
+        this.elector = new ArrayList<>();
+        this.candidate = new ArrayList<>();
+        this.votes = new ArrayList<>();
+        this.finished = false;
     }
 
     /**

@@ -3,10 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gonca/Desktop/poo-project/src/GUI/ResultList.java</file>
-            <file>file:/C:/Users/gonca/Desktop/poo-project/src/GUI/Menu.java</file>
-            <file>file:/C:/Users/gonca/Desktop/poo-project/src/GUI/ConfigMenu.java</file>
-            <file>file:/C:/Users/gonca/Desktop/poo-project/src/GUI/Verify.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/core/ElectionBC.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/gui/CandidateAdd.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/gui/Verify.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/gui/Menu.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/gui/ElectorAdd.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/lib/Election.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/wallet/User.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/gui/ConfigMenu.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/utils/SecurityUtils.java</file>
+            <file>file:/Users/costa/Desktop/Eleicoes_CD/src/eleicoes/core/Vote.java</file>
         </group>
     </open-files>
 </project-private>
