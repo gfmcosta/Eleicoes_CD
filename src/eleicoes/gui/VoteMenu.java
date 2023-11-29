@@ -102,6 +102,10 @@ public class VoteMenu extends javax.swing.JDialog {
                    String vote=buttonGroup1.getSelection().getActionCommand();
                    Global.eleitoral.addListVotes(vote);
                    Global.loggedP.setVoted(true);
+                   
+                   
+                   
+                   
                    JOptionPane.showMessageDialog(null, "Obrigado por votar "+Global.loggedP.getName()+"!", "Voto", JOptionPane.INFORMATION_MESSAGE);
                    dispose();
                }

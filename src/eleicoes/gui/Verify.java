@@ -185,8 +185,12 @@ public class Verify extends javax.swing.JFrame {
                 //open nem form
                 String pwd = new String(jPasswordField1.getPassword());
                 User loadedUser = User.loadUser(jTextField1.getText(), pwd);
-                new Menu().setVisible(true);
-                dispose();
+                if(loadedUser.getPrivKey()!=null){
+                    new Menu().setVisible(true);
+                    dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "A password não está coreta", "Atenção", JOptionPane.WARNING_MESSAGE);
+                }
                 break;
             }else if(p.getCC().equals(ccn) && p.getVoted()==true){
                 //cant vote but can see the results
@@ -198,6 +202,7 @@ public class Verify extends javax.swing.JFrame {
                 dispose();
             }
         }
+     
         if (!isValid){
            //cc never exist
            JOptionPane.showMessageDialog(null, "O seu número de CC não se encontra na nossa lista", "Atenção", JOptionPane.WARNING_MESSAGE);

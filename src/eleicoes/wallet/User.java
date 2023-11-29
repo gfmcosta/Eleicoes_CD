@@ -15,6 +15,7 @@
 //////////////////////////////////////////////////////////////////////////////
 package eleicoes.wallet;
 
+import eleicoes.core.ElectionBC;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -31,6 +32,8 @@ import java.util.Scanner;
 import eleicoes.core.Vote;
 import eleicoes.utils.SecurityUtils;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created on 29/09/2023, 17:23:07
@@ -38,31 +41,31 @@ import java.io.File;
  * @author manso - computer
  */
 public class User {
-
+    
     private String cc;
     private PublicKey pubKey;
     private PrivateKey privKey;    
-    private List<Vote> transactions;
+    private List<Vote> votos;
 
     public User(String cc) throws Exception {
         this.cc = cc;        
         KeyPair kp = SecurityUtils.generateRSAKeyPair();
         privKey = kp.getPrivate();
         pubKey = kp.getPublic();
-        transactions = new ArrayList<>();
+        votos = new ArrayList<>();
     }
 
     public User(String cc, PublicKey pubKey, PrivateKey privKey,List<Vote> transactions) {
         this.cc = cc;
         this.pubKey = pubKey;
         this.privKey = privKey;       
-        this.transactions = transactions;
+        this.votos = transactions;
     }
 
     public void addTransaction(Vote t) throws Exception {
         Files.write(Path.of(getUserFileName(t.getTo())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
         Files.write(Path.of(getUserFileName(t.getFrom())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
-        transactions.add(t);
+        votos.add(t);
     }
 
     @Override
@@ -73,7 +76,7 @@ public class User {
                 + "\nPub\t: " + pub
                 + "\nPrv\t: " + priv
                 + "\nTransactions \n";
-        for (Vote transaction : transactions) {
+        for (Vote transaction : votos) {
             txt += transaction.toString() + "\n";
         }
         return txt;
@@ -92,7 +95,7 @@ public class User {
         out.println(cc);
         out.println(Base64.getEncoder().encodeToString(pubKey.getEncoded()));
         out.println(Base64.getEncoder().encodeToString(SecurityUtils.encrypt(privKey.getEncoded(), password)));       
-        for (Vote transaction : transactions) {
+        for (Vote transaction : votos) {
             out.println(transaction.toText());
         }
         out.close();
@@ -138,7 +141,6 @@ public class User {
                 privKey, transactions);
     }
 
- 
 
     public String getCC() {
         return cc;
@@ -153,7 +155,10 @@ public class User {
     } 
 
     public List<Vote> getTransactions() {
-        return transactions;
+        return votos;
     }
+    
+    
+    
 
 }

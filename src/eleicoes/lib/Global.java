@@ -4,6 +4,7 @@
  */
 package eleicoes.lib;
 
+import eleicoes.core.ElectionBC;
 import eleicoes.lib.Election;
 import eleicoes.lib.Person;
 

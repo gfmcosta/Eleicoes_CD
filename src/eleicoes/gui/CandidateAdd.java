@@ -7,6 +7,7 @@ package eleicoes.gui;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.lib.Person;
+import eleicoes.wallet.User;
 import java.awt.Image;
 import java.io.File;
 import java.nio.file.Path;
@@ -226,6 +227,13 @@ public class CandidateAdd extends javax.swing.JDialog {
                 Candidate x = new Candidate(jTextField2.getText(), jTextField3.getText(), "/resources/"+jTextField4.getText());
                 // add to the list
                 Global.eleitoral.addListCandidate(x);
+                
+                        //Crio um utilizador da classe User
+                        User u = new User(x.getAbv());
+                        //Gero as caves publicas e privadas com password 1233
+                        u.save("123"); 
+                        
+                        
                 JOptionPane.showMessageDialog(null, "Candidato adicionado com sucesso.", "Eleitor", JOptionPane.INFORMATION_MESSAGE);
                 //variable to save jOptionPane response
                 int result = JOptionPane.showConfirmDialog(null, "Deseja adicionar um novo candidato?","Confirmar",JOptionPane.YES_NO_OPTION);
@@ -246,13 +254,28 @@ public class CandidateAdd extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        try{
         Candidate x = new Candidate("Andre Ventura", "AV", "/resources/AV.jpg");
         // add to the list
         Global.eleitoral.addListCandidate(x);
+        
+        //Crio um utilizador da classe User
+        User u = new User(x.getAbv());
+        //Gero as caves publicas e privadas com password 1233
+        u.save("123"); 
+        
+        
         x = new Candidate("Antonio Costa", "AC", "/resources/PS.png");
         // add to the list
         Global.eleitoral.addListCandidate(x);
+        //Crio um utilizador da classe User
+        u = new User(x.getAbv());
+        //Gero as caves publicas e privadas com password 1233
+        u.save("123");
         JOptionPane.showMessageDialog(null, "Candidato adicionado com sucesso.", "Eleitor", JOptionPane.INFORMATION_MESSAGE);
+
+        }catch(Exception e ){
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
