@@ -295,12 +295,12 @@ public class ConfigMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         new ElectorAdd(null,true).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         try{
         if(jTextField1.getText().equals("") || jTextField2.getText().equals("") || jTextField3.getText().equals("") || jTextField4.getText().equals("")){
             //invalid Form
@@ -342,12 +342,12 @@ public class ConfigMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         new CandidateAdd(null,true).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -366,6 +366,7 @@ public class ConfigMenu extends javax.swing.JDialog {
         Global.eleitoral.setDataI(hoje);
         Global.eleitoral.setDataF(amanha);
         Global.eleitoral.setImage("info.png");
+        
         JOptionPane.showMessageDialog(null, "Eleição criada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         dispose();
 

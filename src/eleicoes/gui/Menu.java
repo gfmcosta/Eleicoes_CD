@@ -184,7 +184,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setText("Menu");
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton4.setText("Gerar Candidatos");
+        jButton4.setText("Gerar Eleitores");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -335,7 +335,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         try{
         //get the number of files into wikiElection
         String path = System.getProperty("user.dir") + File.separator + "wikiElection";
@@ -357,16 +357,16 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         new ConfigMenu(this,true).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         
         try{
         if(Global.eleitoral.getName().equals("")){
@@ -400,12 +400,12 @@ public class Menu extends javax.swing.JFrame {
     }
     
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         
     }//GEN-LAST:event_formFocusGained
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         int result = JOptionPane.showConfirmDialog (null, "Terminar Sessão?","Confirmar",JOptionPane.YES_NO_OPTION);
         if(result==JOptionPane.YES_OPTION){
          new Verify().setVisible(true);
@@ -416,7 +416,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         try{
         if(Global.eleitoral.getName().equals("")){
             //is not created yet
@@ -468,13 +468,12 @@ public class Menu extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Erro ao adicionar Eleitor", "Atenção", JOptionPane.WARNING_MESSAGE);
                         break;
                     }else{
+                        
+                        //chaves
+                        add.save(add.getPassword());
                         Global.eleitoral.addListElector(add);
-                        //Crio um utilizador da classe User
-                        User u = new User(add.getCC());
-                        //Gero as caves publicas e privadas com password 1233
-                        u.save("123"); 
                         System.out.println(add.getName());
-                     //   JOptionPane.showMessageDialog(null, "Eleitor: "+add.getName()+" adiconado com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+                     //   JOptionPane.showMessageDialog(null, "Eleitor: "+addVoteToBlockChain.getName()+" adiconado com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else{
                     add=add.randomPerson('M',apelidos,nomesM);
@@ -482,13 +481,13 @@ public class Menu extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Erro ao adicionar Eleitor", "Atenção", JOptionPane.WARNING_MESSAGE);
                         break;
                     }else{
+                        
+                        //chaves
+                        add.save(add.getPassword());
                         Global.eleitoral.addListElector(add);
-                        //Crio um utilizador da classe User
-                        User u = new User(add.getCC());
-                        //Gero as caves publicas e privadas com password 1233
-                        u.save("123");
+                        
                         System.out.println(add.getName());
-                     //   JOptionPane.showMessageDialog(null, "Eleitor: "+add.getName()+" adiconado com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+                     //   JOptionPane.showMessageDialog(null, "Eleitor: "+addVoteToBlockChain.getName()+" adiconado com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
@@ -502,11 +501,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         if(Global.isAdmin==true){
             if(Global.eleitoral.getName().equals("")){
                 //is not created
@@ -525,7 +524,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         Date today = new Date();
         if(today.after(Global.eleitoral.getDataI()) || today.equals(Global.eleitoral.getDataI()) && today.before(Global.eleitoral.getDataF()) || today.equals(Global.eleitoral.getDataF() )){
            Global.eleitoral.setFinished(true);

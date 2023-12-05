@@ -4,20 +4,29 @@
  */
 package eleicoes.lib;
 
-import java.io.BufferedReader;
+import eleicoes.core.Vote;
+import eleicoes.utils.SecurityUtils;
+
 import java.io.File;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import javax.swing.ImageIcon;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,22 +35,36 @@ import javax.swing.ImageIcon;
 public class Person {
     private String name;
     private String cc;
+    private String password;
     private Date dataNasc;
     private String image;
     private String sexo;
     private boolean voted;
+    
+    private PublicKey pubKey;
+    private PrivateKey privKey;    
+    private List<Vote> votos;
     
     /** 
     * Class constructor.
     */
     //Construtor por defeito
     public Person(){
-        name="";
-        cc="";
-        voted = false;
-        dataNasc=new Date();
-        image="";
-        sexo="";
+        try {
+            name="";
+            cc="";
+            password="";
+            voted = false;
+            dataNasc=new Date();
+            image="";
+            sexo="";
+            KeyPair kp = SecurityUtils.generateRSAKeyPair();
+            privKey = kp.getPrivate();
+            pubKey = kp.getPublic();
+            votos = new ArrayList<>();
+        } catch (Exception ex) {
+            Logger.getLogger(Person.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /** 
@@ -54,27 +77,26 @@ public class Person {
      * @param v
     */
     //Construtor com parametros
-    public Person(String n, String c, Date d,String i, String s, boolean v){
+    public Person(String n, String c, Date d,String i, String s, boolean v, String p) throws Exception{
         name=n;
         cc=c;
+        password = p;
         voted=v;
         dataNasc=d;
         image= i;
         sexo=s;
+        KeyPair kp = SecurityUtils.generateRSAKeyPair();
+        privKey = kp.getPrivate();
+        pubKey = kp.getPublic();
+        votos = new ArrayList<>();
     }
     
-    /** 
-    * Class constructor copy.
-    * @param t Person object
-    */
-    //Construtor Cópia
-    public Person(Person t){
-        name=t.name;
-        cc=t.cc;
-        voted=t.voted;
-        dataNasc= t.dataNasc;
-        image= t.image;
-        sexo=t.sexo;
+    public Person(String cc, String p, PublicKey pubKey, PrivateKey privKey,List<Vote> votos) {
+        this.cc = cc;
+        this.password=p;
+        this.pubKey = pubKey;
+        this.privKey = privKey;       
+        this.votos = votos;
     }
     
     /** 
@@ -94,7 +116,15 @@ public class Person {
     public void setName(String n){
         name= n;
     }
-    
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+        
     /** 
     * Get and returns the Person identification
     * @return cc - person cc (identification)
@@ -206,7 +236,7 @@ public class Person {
                     Date data = new Date();
                     Calendar c = Calendar.getInstance();
                     c.setTime(data);
-                    c.add(Calendar.YEAR,-ano);
+                    c.set(Calendar.YEAR, ano);
                     data=c.getTime();
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String dataString = formato.format(data);
@@ -217,19 +247,113 @@ public class Person {
                         pName = pName.substring(pName.indexOf(",\""), pName.lastIndexOf("\","));
                         pName = pName.substring(2,pName.length());
                         String pApelido = apelidos.get(r.nextInt(apelidos.size()-1)+1);
-                        x = new Person(pName+" "+pApelido,cc+"", data, "/resources/defaultMale.png","M", false);
+                        x = new Person(pName+" "+pApelido,cc+"", data, "/resources/defaultMale.png","M", false,"123");
                         return x;
                     }else{
                         String pName = nomes.get(r.nextInt(nomes.size()-1)+1);
                         pName = pName.substring(pName.indexOf(",\""), pName.lastIndexOf("\","));
                         pName = pName.substring(2,pName.length());
                         String pApelido = apelidos.get(r.nextInt(apelidos.size()-1)+1);
-                        x = new Person(pName+" "+pApelido,cc+"", data, "/resources/defaultFemale.png","F", false);
+                        x = new Person(pName+" "+pApelido,cc+"", data, "/resources/defaultFemale.png","F", false,"123");
                         return x;
                     }            
             }catch (Exception ex){
                 System.out.println(ex.getMessage());
                 return null;
             }
+    }
+    
+    
+    public void addVote(Vote t) throws Exception {
+        Files.write(Path.of(getUserFileName(t.getTo())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Path.of(getUserFileName(t.getFrom())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
+        votos.add(t);
+    }
+
+    @Override
+    public String toString() {
+        String pub = Base64.getEncoder().encodeToString(pubKey.getEncoded());
+        String priv = privKey != null ? Base64.getEncoder().encodeToString(privKey.getEncoded()) : "unknow";        
+        String txt = "CC\t: " + cc
+                + "\nPub\t: " + pub
+                + "\nPrv\t: " + priv
+                + "\nVotos \n";
+        for (Vote v : votos) {
+            txt += v.toString() + "\n";
+        }
+        return txt;
+
+    }
+
+    public static String getUserFileName(String cc) throws Exception {
+        return cc + ".user";
+    }
+
+    public void save(String password) throws Exception {
+        //String fileName = getUserFileName(cc);
+        String fileName = "keys" + File.separator + getUserFileName(cc);
+
+        PrintStream out = new PrintStream(new FileOutputStream(fileName));
+        out.println(cc);
+        out.println(Base64.getEncoder().encodeToString(pubKey.getEncoded()));
+        out.println(Base64.getEncoder().encodeToString(SecurityUtils.encrypt(privKey.getEncoded(), password)));
+        for (Vote v : votos) {
+            out.println(v.toText());
+        }
+        out.close();
+    }
+
+    public static Person loadUser(String... params) throws Exception {
+        params[0] = getUserFileName(params[0]);
+        return load(params);
+    }
+
+    /**
+     * loads an user from filename
+     *
+     * @param params array of parameters
+     * <br>params[0] - filename (mandatory)
+     * <br>params[1] - password (optional)
+     *
+     * @return User
+     * @throws Exception
+     */
+    private static Person load(String... params) throws Exception {
+        String filePath = "keys" + File.separator + params[0];
+        Scanner file = new Scanner(new FileInputStream(filePath));
+        String cc = file.nextLine();
+        String pub = file.nextLine();
+        String priv = file.nextLine();
+        String pwd = params[1];
+
+        PublicKey pubKey = SecurityUtils.getPublicKey(Base64.getDecoder().decode(pub));
+        PrivateKey privKey = null;        
+        List<Vote> votes = new ArrayList<>();
+        //try to load keys 
+        try {
+            privKey = SecurityUtils.getPrivateKey(SecurityUtils.decrypt(Base64.getDecoder().decode(priv), params[1]));            
+            while (file.hasNext()) {
+                votes.add(Vote.fromText(file.nextLine()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new Person(cc,pwd,
+                SecurityUtils.getPublicKey(Base64.getDecoder().decode(pub)),
+                privKey, votes);
+    }
+
+
+    public PublicKey getPubKey() {
+        return pubKey;
+    }
+
+    public PrivateKey getPrivKey() {
+        return privKey;
+    } 
+
+    public List<Vote> getTransactions() {
+        return votos;
     }
 }

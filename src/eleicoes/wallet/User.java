@@ -15,7 +15,6 @@
 //////////////////////////////////////////////////////////////////////////////
 package eleicoes.wallet;
 
-import eleicoes.core.ElectionBC;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -125,12 +124,12 @@ public class User {
 
         PublicKey pubKey = SecurityUtils.getPublicKey(Base64.getDecoder().decode(pub));
         PrivateKey privKey = null;        
-        List<Vote> transactions = new ArrayList<>();
+        List<Vote> votes = new ArrayList<>();
         //try to load keys 
         try {
             privKey = SecurityUtils.getPrivateKey(SecurityUtils.decrypt(Base64.getDecoder().decode(priv), params[1]));            
             while (file.hasNext()) {
-                transactions.add(Vote.fromText(file.nextLine()));
+                votes.add(Vote.fromText(file.nextLine()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,7 +137,7 @@ public class User {
 
         return new User(cc,
                 SecurityUtils.getPublicKey(Base64.getDecoder().decode(pub)),
-                privKey, transactions);
+                privKey, votes);
     }
 
 

@@ -15,12 +15,15 @@
 //////////////////////////////////////////////////////////////////////////////
 package eleicoes.blockchain;
 
+import eleicoes.core.Vote;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created on 22/08/2022, 10:09:17
@@ -31,7 +34,8 @@ import java.util.ArrayList;
 public class BlockChain implements Serializable {
 
     ArrayList<Block> chain = new ArrayList<>();
-
+    //ArrayList temporario para guardar 4 votos para adicionar a um bloco
+    ArrayList<Vote> temp = new ArrayList<>();
     
     public ArrayList<Block> getChain() {
         return chain;
@@ -57,15 +61,33 @@ public class BlockChain implements Serializable {
      * @param data data to add in the block
      * @param dificulty dificulty of block to miners (POW)
      */
-    public void add(String data, int dificulty) {
-        //hash of previous block
-        String prevHash = getLastBlockHash();
-        //mining block
-        int nonce = Miner.getNonce(prevHash + data, dificulty);
-        //build new block
-        Block newBlock = new Block(prevHash, data, nonce);
-        //add new block to the chain
-        chain.add(newBlock);
+    public void add(Vote data, int dificulty) {
+        try {
+            temp.add(data);
+            if (temp.size()==4){
+                
+                //hash of previous block
+                String prevHash = getLastBlockHash();
+
+
+                //mining block paralelizado
+                int nonce = Miner.NoncePAR(prevHash + temp, dificulty);
+
+
+
+                //build new block
+                Block newBlock = new Block(prevHash, temp.toString(), nonce);
+                //add new block to the chain
+                chain.add(newBlock);
+                temp.clear();
+            }
+            System.out.println("Adicionou o voto: "+ data.toString());
+            
+            
+            
+        } catch (InterruptedException ex) {
+            Logger.getLogger(BlockChain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Block get(int index) {

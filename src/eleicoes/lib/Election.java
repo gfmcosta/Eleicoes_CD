@@ -4,8 +4,14 @@
  */
 package eleicoes.lib;
 
+import eleicoes.blockchain.Block;
+import eleicoes.blockchain.BlockChain;
+import static eleicoes.blockchain.Converter.objectToByteArray;
+import eleicoes.core.Vote;
+import static eleicoes.utils.SecurityUtils.verifySign;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -20,7 +26,9 @@ public class Election {
     ArrayList<Candidate> candidate;
     ArrayList<String> votes;
     boolean finished;
-    //Blockchain bc
+    private BlockChain secureLedger;
+    public int dificulty = 1;
+    
 
     public Election() {
         this.name = "";
@@ -31,6 +39,7 @@ public class Election {
         this.candidate = new ArrayList<>();
         this.votes = new ArrayList<>();
         this.finished = false;
+        this.secureLedger = new BlockChain();
     }
 
     /**
@@ -202,5 +211,60 @@ public class Election {
     }
     
     
+    
+    
+     public BlockChain getSecureLedger(){
+        return secureLedger;
+    }
+      
+    public List<Vote> getLedger() {
+        List<Vote> lst = new ArrayList<>();
+        
+        for( Block b : secureLedger.getChain()){
+            lst.add( Vote.fromText(b.getData()));
+        }
+        return lst;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder txt = new StringBuilder();
+        for (Vote v : getLedger()) {
+            txt.append(v.toString()).append("\n");
+        }
+        return txt.toString();
+    }
+
+    public void save(String fileName) throws Exception {
+        secureLedger.save(fileName);
+    }
+
+    public static Election load(String fileName) throws Exception {
+        Election tmp = new Election();
+        tmp.secureLedger.load(fileName);
+        return tmp;
+    }
+    
+    public void addVoteToBlockChain(Vote t) throws Exception {
+        
+        if (isValid(t)) {
+            secureLedger.add(t,dificulty);
+        } else {
+            throw new Exception("Vote not valid");
+            
+        }
+    }
+    
+    public boolean isValid(Vote t) throws Exception {
+        if (t.getFrom().trim().isEmpty()) {
+            throw new Exception("From user is empty");
+        }
+        if (t.getTo().trim().isEmpty()) {
+            throw new Exception("To user is empty");
+        }
+        //Verificar assinatura
+        Vote v = new Vote(t.getFrom(),t.getTo(),null);
+        return verifySign(objectToByteArray(v), t.getSignatue(), Global.loggedP.getPubKey());
+    }
 }
 

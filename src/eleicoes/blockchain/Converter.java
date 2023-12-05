@@ -81,6 +81,7 @@ public class Converter {
         try {
             return byteArrayToObject(hexToByteArray(hex));
         } catch (Exception ex) {
+            ex.printStackTrace();
             Logger.getLogger(Converter.class.getName()).log(Level.SEVERE, null, ex);
             return "ERROR hexToObject";
         }

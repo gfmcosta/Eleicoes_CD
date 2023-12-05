@@ -236,8 +236,8 @@ public class ElectorAdd extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Person x = new Person();
+        // TODO addVoteToBlockChain your handling code here:
+        Person x = null;
         try{
         if(jTextField1.getText().equals("") || jTextField2.getText().equals("") || jTextField3.getText().equals("") || jTextField4.getText().equals("")){
             //invalid Form
@@ -263,9 +263,9 @@ public class ElectorAdd extends javax.swing.JDialog {
                 //bolean to see if one of the radiobuttons is selected
                 boolean isSexoOK =true;
                 if(jRadioButton1.isSelected()){
-                    x = new Person(jTextField2.getText(), jTextField1.getText(), data, "/resources/"+jTextField4.getText(), "M", false);
+                    x = new Person(jTextField2.getText(), jTextField1.getText(), data, "/resources/"+jTextField4.getText(), "M", false,"");
                 }else if(jRadioButton2.isSelected()){
-                    x = new Person(jTextField2.getText(), jTextField1.getText(), data, "/resources/"+jTextField4.getText(), "F", false);
+                    x = new Person(jTextField2.getText(), jTextField1.getText(), data, "/resources/"+jTextField4.getText(), "F", false,"");
                 }else{
                     isSexoOK=false;
                 }

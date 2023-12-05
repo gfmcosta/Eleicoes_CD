@@ -4,7 +4,6 @@
  */
 package eleicoes.lib;
 
-import eleicoes.core.ElectionBC;
 import eleicoes.lib.Election;
 import eleicoes.lib.Person;
 
@@ -14,6 +13,7 @@ import eleicoes.lib.Person;
  */
 //This is a global class to acces all my variables pratically.
 public class Global {
+    public static boolean isFirst=true;
     //default password to admin login
     public static String myPassword="Admin123";
     //verify if shows admin menu

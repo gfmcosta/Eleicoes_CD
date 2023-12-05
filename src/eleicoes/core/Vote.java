@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Locale;
 import eleicoes.blockchain.Converter;
 import java.util.Arrays;
+import java.util.Base64;
 
 /**
  *
@@ -40,7 +41,7 @@ public class Vote implements Serializable {
         return signature;
     }
 
-    public void setValue(byte[] signature) {
+    public void setSignatue(byte[] signature) {
         this.signature = signature;
     }
 
@@ -63,8 +64,8 @@ public class Vote implements Serializable {
     @Override
     public String toString() {
         //format values to english notation
-
-        return String.format("%-10s -> %20s -> %s", from, Arrays.toString(signature), to);
+        String signatureString = Base64.getEncoder().encodeToString(signature);
+        return String.format("%-10s -> %20s -> %s", from, signatureString, to);
         //return from + "\t : " + to + "\t -> " + signature;
     }
 

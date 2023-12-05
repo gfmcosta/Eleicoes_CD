@@ -188,7 +188,7 @@ public class CandidateAdd extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         Path defaultDirectoryPath = Paths.get(System.getProperty("user.dir"), "src", "resources");
         File defaultDirectory = defaultDirectoryPath.toFile();
         
@@ -203,7 +203,7 @@ public class CandidateAdd extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         try{
         if(jTextField2.getText().equals("") || jTextField3.getText().equals("") || jTextField4.getText().equals("")){
             //invalid Form
@@ -225,15 +225,8 @@ public class CandidateAdd extends javax.swing.JDialog {
                 //name is unique
                 //add a new Candidate object with all informations
                 Candidate x = new Candidate(jTextField2.getText(), jTextField3.getText(), "/resources/"+jTextField4.getText());
-                // add to the list
-                Global.eleitoral.addListCandidate(x);
-                
-                        //Crio um utilizador da classe User
-                        User u = new User(x.getAbv());
-                        //Gero as caves publicas e privadas com password 1233
-                        u.save("123"); 
-                        
-                        
+                // addVoteToBlockChain to the list
+                Global.eleitoral.addListCandidate(x);              
                 JOptionPane.showMessageDialog(null, "Candidato adicionado com sucesso.", "Eleitor", JOptionPane.INFORMATION_MESSAGE);
                 //variable to save jOptionPane response
                 int result = JOptionPane.showConfirmDialog(null, "Deseja adicionar um novo candidato?","Confirmar",JOptionPane.YES_NO_OPTION);
@@ -253,25 +246,16 @@ public class CandidateAdd extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         try{
         Candidate x = new Candidate("Andre Ventura", "AV", "/resources/AV.jpg");
-        // add to the list
+        // addVoteToBlockChain to the list
         Global.eleitoral.addListCandidate(x);
-        
-        //Crio um utilizador da classe User
-        User u = new User(x.getAbv());
-        //Gero as caves publicas e privadas com password 1233
-        u.save("123"); 
-        
-        
+
         x = new Candidate("Antonio Costa", "AC", "/resources/PS.png");
-        // add to the list
+        // addVoteToBlockChain to the list
         Global.eleitoral.addListCandidate(x);
-        //Crio um utilizador da classe User
-        u = new User(x.getAbv());
-        //Gero as caves publicas e privadas com password 1233
-        u.save("123");
+     
         JOptionPane.showMessageDialog(null, "Candidato adicionado com sucesso.", "Eleitor", JOptionPane.INFORMATION_MESSAGE);
 
         }catch(Exception e ){

@@ -4,10 +4,18 @@
  */
 package eleicoes.gui;
 
+import eleicoes.blockchain.Converter;
+import eleicoes.core.Vote;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
+import eleicoes.utils.SecurityUtils;
+import eleicoes.wallet.User;
 import java.awt.Image;
 import java.awt.TextArea;
+import java.security.Key;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -103,8 +111,27 @@ public class VoteMenu extends javax.swing.JDialog {
                    Global.eleitoral.addListVotes(vote);
                    Global.loggedP.setVoted(true);
                    
+                   //Cria um voto
+                   //From: CC da pessoa encriptado com a chave publica 
+                   //To: String abreviatura do candidato
+                   //Signature: Assinaturado objeto Voto com a chave privada da pessoa (O voto tem apenas from e to nesta instância com assinatura a null)                  
+                   Vote v =null;                            
+                   try {
+                       byte[] eleitor = SecurityUtils.encrypt(Converter.objectToByteArray(Global.loggedP.getCC()), Global.loggedP.getPubKey());
+                       String eleitorString = Base64.getEncoder().encodeToString(eleitor);
+                       v = new Vote(eleitorString, vote, null);
+                       byte[] assinatura = SecurityUtils.sign(Converter.objectToByteArray(v), Global.loggedP.getPrivKey());
+                       v.setSignatue(assinatura);
+                   } catch (Exception ex) {
+                       Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
+                   }
                    
-                   
+                   try {
+                       Global.eleitoral.addVoteToBlockChain(v);
+                       System.out.println(Global.eleitoral.toString());
+                   } catch (Exception ex) {
+                       Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
+                   }
                    
                    JOptionPane.showMessageDialog(null, "Obrigado por votar "+Global.loggedP.getName()+"!", "Voto", JOptionPane.INFORMATION_MESSAGE);
                    dispose();
@@ -193,7 +220,7 @@ public class VoteMenu extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+        // TODO addVoteToBlockChain your handling code here:
         
     }//GEN-LAST:event_formWindowOpened
 
