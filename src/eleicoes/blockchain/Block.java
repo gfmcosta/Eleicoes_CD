@@ -16,6 +16,7 @@
 package eleicoes.blockchain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created on 22/08/2022, 09:23:49
@@ -31,6 +32,7 @@ public class Block implements Serializable {
     String data;         // data in the block
     int nonce;           // proof of work 
     String currentHash;  // Hash of block
+    String merkleTreeRoot; //Root of MerkelTree
 
     public String getPreviousHash() {
         return previousHash;
@@ -48,17 +50,15 @@ public class Block implements Serializable {
         return currentHash;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     
     
-    public Block(String previousHash, String data, int nonce) {
+    public Block(String previousHash, ArrayList data, int nonce) {
         this.previousHash = previousHash;
-        this.data = data;
+        this.data = data.toString();
         this.nonce = nonce;
         this.currentHash = calculateHash();
+        this.merkleTreeRoot= generateMerkleTree(data);
     }
 
     public String calculateHash() {
@@ -77,9 +77,9 @@ public class Block implements Serializable {
         return currentHash.equals(calculateHash());
     }
 
-    //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    private static final long serialVersionUID = 202208220923L;
-    //:::::::::::::::::::::::::::  Copyright(c) M@nso  2022  :::::::::::::::::::
-    ///////////////////////////////////////////////////////////////////////////
+    private String generateMerkleTree(ArrayList data) {
+        MerkleTreeString mk = new MerkleTreeString(data);
+        return mk.getRoot();
+    }
 
 }

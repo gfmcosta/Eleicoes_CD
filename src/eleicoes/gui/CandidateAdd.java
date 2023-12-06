@@ -249,11 +249,9 @@ public class CandidateAdd extends javax.swing.JDialog {
         // TODO addVoteToBlockChain your handling code here:
         try{
         Candidate x = new Candidate("Andre Ventura", "AV", "/resources/AV.jpg");
-        // addVoteToBlockChain to the list
         Global.eleitoral.addListCandidate(x);
 
         x = new Candidate("Antonio Costa", "AC", "/resources/PS.png");
-        // addVoteToBlockChain to the list
         Global.eleitoral.addListCandidate(x);
      
         JOptionPane.showMessageDialog(null, "Candidato adicionado com sucesso.", "Eleitor", JOptionPane.INFORMATION_MESSAGE);

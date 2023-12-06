@@ -221,7 +221,17 @@ public class Election {
         List<Vote> lst = new ArrayList<>();
         
         for( Block b : secureLedger.getChain()){
-            lst.add( Vote.fromText(b.getData()));
+            // Remover os colchetes e dividir a string em votos individuais
+            String[] votesA = b.getData().substring(1, b.getData().length() - 1).split(",");
+            for (String voteString : votesA) {
+                try {
+                    Vote vote = Vote.fromString(voteString.trim());
+                    lst.add(vote);
+                } catch (Exception e) {
+                    // Tratar exceção, se necessário
+                    System.err.println("Erro ao converter voto: " + e.getMessage());
+                }
+            }
         }
         return lst;
     }

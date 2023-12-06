@@ -76,7 +76,8 @@ public class BlockChain implements Serializable {
 
 
                 //build new block
-                Block newBlock = new Block(prevHash, temp.toString(), nonce);
+                String dataw = temp.toString();
+                Block newBlock = new Block(prevHash, temp, nonce);
                 //add new block to the chain
                 chain.add(newBlock);
                 temp.clear();
