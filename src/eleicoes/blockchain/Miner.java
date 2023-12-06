@@ -1,18 +1,3 @@
-//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
-//::                                                                         ::
-//::     Antonio Manuel Rodrigues Manso                                      ::
-//::                                                                         ::
-//::     I N S T I T U T O    P O L I T E C N I C O   D E   T O M A R        ::
-//::     Escola Superior de Tecnologia de Tomar                              ::
-//::     e-mail: manso@ipt.pt                                                ::
-//::     url   : http://orion.ipt.pt/~manso                                  ::
-//::                                                                         ::
-//::     This software was build with the purpose of investigate and         ::
-//::     learning.                                                           ::
-//::                                                                         ::
-//::                                                               (c)2022   ::
-//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-//////////////////////////////////////////////////////////////////////////////
 package eleicoes.blockchain;
 
 import java.security.MessageDigest;
@@ -20,10 +5,8 @@ import java.util.Base64;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created on 28/09/2022, 11:13:39
  *
- * @author IPT - computer
- * @version 1.0
+ * @author gonca
  */
 public class Miner {
     public static int MAX_NONCE = (int) 1E9;
