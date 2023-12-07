@@ -4,6 +4,8 @@
  */
 package eleicoes.gui;
 
+import distributedMiner.RemoteInterface;
+import distributedMiner.utils.RMI;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;
@@ -366,6 +368,15 @@ public class ConfigMenu extends javax.swing.JDialog {
         Global.eleitoral.setDataI(hoje);
         Global.eleitoral.setDataF(amanha);
         Global.eleitoral.setImage("info.png");
+        
+        try {
+            //Alterar para o ip da máquina servidor
+            String ip="//192.168.169.11:10010/RemoteMiner";
+            Global.remote = (RemoteInterface) RMI.getRemote(ip);
+            System.out.println("Connected to "+ ip);
+        } catch (Exception e) {
+            System.out.println("Connect to server " + e);
+        }
         
         JOptionPane.showMessageDialog(null, "Eleição criada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         dispose();

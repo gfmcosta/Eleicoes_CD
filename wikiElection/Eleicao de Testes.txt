@@ -1,0 +1,11 @@
+Eleicao de Testes
+06/12/2023
+07/12/2023
+/resources/info.png
+true
+-
+*
+.
+0
+VB:0
+Empate

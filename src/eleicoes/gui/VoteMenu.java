@@ -5,6 +5,7 @@
 package eleicoes.gui;
 
 import eleicoes.blockchain.Converter;
+import eleicoes.core.Transfer;
 import eleicoes.core.Vote;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
@@ -127,8 +128,8 @@ public class VoteMenu extends javax.swing.JDialog {
                    }
                    
                    try {
-                       Global.eleitoral.addVoteToBlockChain(v);
-                       System.out.println(Global.eleitoral.toString());
+                      Global.eleitoral.addVoteToBlockChain(v);
+                      System.out.println(Global.eleitoral.toString());
                    } catch (Exception ex) {
                        Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
                    }

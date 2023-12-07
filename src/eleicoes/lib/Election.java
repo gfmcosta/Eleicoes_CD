@@ -258,7 +258,12 @@ public class Election {
     public void addVoteToBlockChain(Vote t) throws Exception {
         
         if (isValid(t)) {
-            secureLedger.add(t,dificulty);
+            //secureLedger.add(t,dificulty);
+            try {
+               Global.remote.addTransaction(t.toText());
+            } catch (Exception ex) {
+                System.out.println("Add Transaction "+ ex);
+            }
         } else {
             throw new Exception("Vote not valid");
             

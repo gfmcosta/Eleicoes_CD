@@ -4,6 +4,8 @@
  */
 package eleicoes.gui;
 
+import distributedMiner.RemoteInterface;
+import distributedMiner.utils.RMI;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;
@@ -45,7 +47,8 @@ public class Verify extends javax.swing.JFrame {
             
         ImageIcon i = new javax.swing.ImageIcon(getClass().getResource("/resources/upload.png"));
         Image img = i.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-        jLabel8.setIcon(new ImageIcon(img));       
+        jLabel8.setIcon(new ImageIcon(img));
+        
     }
     
     void deleteFiles(){

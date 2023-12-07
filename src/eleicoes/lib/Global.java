@@ -4,6 +4,7 @@
  */
 package eleicoes.lib;
 
+import distributedMiner.RemoteInterface;
 import eleicoes.lib.Election;
 import eleicoes.lib.Person;
 
@@ -23,4 +24,7 @@ public class Global {
     public static Election eleitoralSearch = new Election();
     //Person logged
     public static Person loggedP = new Person();
+    
+    public static RemoteInterface remote;
+
 }
