@@ -4,10 +4,9 @@
  */
 package eleicoes.lib;
 
-import eleicoes.blockchain.Block;
-import eleicoes.blockchain.BlockChain;
-import static eleicoes.blockchain.Converter.objectToByteArray;
-import eleicoes.core.Vote2;
+
+import client.Vote;
+import static distributedMiner.utils.Converter.objectToByteArray;
 import static eleicoes.utils.SecurityUtils.verifySign;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +25,6 @@ public class Election {
     ArrayList<Candidate> candidate;
     ArrayList<String> votes;
     boolean finished;
-    private BlockChain secureLedger;
     public int dificulty = 1;
     
 
@@ -39,7 +37,6 @@ public class Election {
         this.candidate = new ArrayList<>();
         this.votes = new ArrayList<>();
         this.finished = false;
-        this.secureLedger = new BlockChain();
     }
 
     /**
@@ -213,49 +210,10 @@ public class Election {
     
     
     
-     public BlockChain getSecureLedger(){
-        return secureLedger;
-    }
-      
-    public List<Vote2> getLedger() {
-        List<Vote2> lst = new ArrayList<>();
-        
-        for( Block b : secureLedger.getChain()){
-            // Remover os colchetes e dividir a string em votos individuais
-            String[] votesA = b.getData().substring(1, b.getData().length() - 1).split(",");
-            for (String voteString : votesA) {
-                try {
-                    Vote2 vote = Vote2.fromString(voteString.trim());
-                    lst.add(vote);
-                } catch (Exception e) {
-                    // Tratar exceção, se necessário
-                    System.err.println("Erro ao converter voto: " + e.getMessage());
-                }
-            }
-        }
-        return lst;
-    }
+     
+     
     
-    @Override
-    public String toString() {
-        StringBuilder txt = new StringBuilder();
-        for (Vote2 v : getLedger()) {
-            txt.append(v.toString()).append("\n");
-        }
-        return txt.toString();
-    }
-
-    public void save(String fileName) throws Exception {
-        secureLedger.save(fileName);
-    }
-
-    public static Election load(String fileName) throws Exception {
-        Election tmp = new Election();
-        tmp.secureLedger.load(fileName);
-        return tmp;
-    }
-    
-    public void addVoteToBlockChain(Vote2 t) throws Exception {
+    public void addVoteToBlockChain(Vote t) throws Exception {
         
         if (isValid(t)) {
             //secureLedger.add(t,dificulty);
@@ -270,7 +228,7 @@ public class Election {
         }
     }
     
-    public boolean isValid(Vote2 t) throws Exception {
+    public boolean isValid(Vote t) throws Exception {
         if (t.getFrom().trim().isEmpty()) {
             throw new Exception("From user is empty");
         }
@@ -278,8 +236,8 @@ public class Election {
             throw new Exception("To user is empty");
         }
         //Verificar assinatura
-        Vote2 v = new Vote2(t.getFrom(),t.getTo(),null);
-        return verifySign(objectToByteArray(v), t.getSignatue(), Global.loggedP.getPubKey());
+        Vote v = new Vote(t.getFrom(),t.getTo(),null);
+        return verifySign(objectToByteArray(v), objectToByteArray(t.getSign()), Global.loggedP.getPubKey());
     }
 }
 

@@ -34,7 +34,6 @@ import distributedMiner.blockchain.BlockChain;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import distributedMiner.utils.Serializer;
-import eleicoes.core.Vote2;
 
 /**
  *

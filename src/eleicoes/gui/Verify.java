@@ -10,7 +10,6 @@ import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;
 import eleicoes.lib.Person;
-import eleicoes.wallet.User;
 import java.awt.Image;
 import java.io.File;
 import java.nio.file.Path;

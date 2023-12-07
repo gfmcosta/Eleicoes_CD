@@ -4,7 +4,7 @@
  */
 package eleicoes.lib;
 
-import eleicoes.core.Vote2;
+import client.Vote;
 import eleicoes.utils.SecurityUtils;
 
 import java.io.File;
@@ -43,7 +43,7 @@ public class Person {
     
     private PublicKey pubKey;
     private PrivateKey privKey;    
-    private List<Vote2> votos;
+    private List<Vote> votos;
     
     /** 
     * Class constructor.
@@ -91,7 +91,7 @@ public class Person {
         votos = new ArrayList<>();
     }
     
-    public Person(String cc, String p, PublicKey pubKey, PrivateKey privKey,List<Vote2> votos) {
+    public Person(String cc, String p, PublicKey pubKey, PrivateKey privKey,List<Vote> votos) {
         this.cc = cc;
         this.password=p;
         this.pubKey = pubKey;
@@ -264,7 +264,7 @@ public class Person {
     }
     
     
-    public void addVote(Vote2 t) throws Exception {
+    public void addVote(Vote t) throws Exception {
         Files.write(Path.of(getUserFileName(t.getTo())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
         Files.write(Path.of(getUserFileName(t.getFrom())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
         votos.add(t);
@@ -278,7 +278,7 @@ public class Person {
                 + "\nPub\t: " + pub
                 + "\nPrv\t: " + priv
                 + "\nVotos \n";
-        for (Vote2 v : votos) {
+        for (Vote v : votos) {
             txt += v.toString() + "\n";
         }
         return txt;
@@ -297,7 +297,7 @@ public class Person {
         out.println(cc);
         out.println(Base64.getEncoder().encodeToString(pubKey.getEncoded()));
         out.println(Base64.getEncoder().encodeToString(SecurityUtils.encrypt(privKey.getEncoded(), password)));
-        for (Vote2 v : votos) {
+        for (Vote v : votos) {
             out.println(v.toText());
         }
         out.close();
@@ -328,12 +328,12 @@ public class Person {
 
         PublicKey pubKey = SecurityUtils.getPublicKey(Base64.getDecoder().decode(pub));
         PrivateKey privKey = null;        
-        List<Vote2> votes = new ArrayList<>();
+        List<Vote> votes = new ArrayList<>();
         //try to load keys 
         try {
             privKey = SecurityUtils.getPrivateKey(SecurityUtils.decrypt(Base64.getDecoder().decode(priv), params[1]));            
             while (file.hasNext()) {
-                votes.add(Vote2.fromText(file.nextLine()));
+                votes.add(Vote.fromText(file.nextLine()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -353,7 +353,7 @@ public class Person {
         return privKey;
     } 
 
-    public List<Vote2> getTransactions() {
+    public List<Vote> getTransactions() {
         return votos;
     }
 }

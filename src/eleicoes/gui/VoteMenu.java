@@ -4,12 +4,11 @@
  */
 package eleicoes.gui;
 
-import eleicoes.blockchain.Converter;
 import client.Vote;
+import distributedMiner.utils.Converter;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.utils.SecurityUtils;
-import eleicoes.wallet.User;
 import java.awt.Image;
 import java.awt.TextArea;
 import java.security.Key;
