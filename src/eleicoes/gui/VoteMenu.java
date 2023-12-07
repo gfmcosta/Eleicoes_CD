@@ -5,8 +5,7 @@
 package eleicoes.gui;
 
 import eleicoes.blockchain.Converter;
-import eleicoes.core.Transfer;
-import eleicoes.core.Vote;
+import client.Vote;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.utils.SecurityUtils;
@@ -71,7 +70,7 @@ public class VoteMenu extends javax.swing.JDialog {
         add(j1);
         y+=50;
         }
-        //blank Vote option
+        //blank Vote2 option
         l = new JLabel("Votar em Branco");
         l.setBounds(6,98+y,192,50);
         l.setFont(new java.awt.Font("Segoe UI", 3, 11));
@@ -120,15 +119,18 @@ public class VoteMenu extends javax.swing.JDialog {
                    try {
                        byte[] eleitor = SecurityUtils.encrypt(Converter.objectToByteArray(Global.loggedP.getCC()), Global.loggedP.getPubKey());
                        String eleitorString = Base64.getEncoder().encodeToString(eleitor);
-                       v = new Vote(eleitorString, vote, null);
+                       v = new Vote(eleitorString, vote);
                        byte[] assinatura = SecurityUtils.sign(Converter.objectToByteArray(v), Global.loggedP.getPrivKey());
-                       v.setSignatue(assinatura);
+                       String assinaturaString = Base64.getEncoder().encodeToString(assinatura);
+                       v= new Vote(eleitorString, vote,assinaturaString);
                    } catch (Exception ex) {
                        Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
                    }
                    
                    try {
-                      Global.eleitoral.addVoteToBlockChain(v);
+                      //Global.eleitoral.addVoteToBlockChain(v);
+                      //Vote t = new Vote(Global.loggedP.getName(), vote, 1);
+                      Global.remote.addTransaction(v.toText());
                       System.out.println(Global.eleitoral.toString());
                    } catch (Exception ex) {
                        Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
-import eleicoes.core.Vote;
+import eleicoes.core.Vote2;
 import eleicoes.utils.SecurityUtils;
 import java.io.File;
 import java.util.logging.Level;
@@ -44,7 +44,7 @@ public class User {
     private String cc;
     private PublicKey pubKey;
     private PrivateKey privKey;    
-    private List<Vote> votos;
+    private List<Vote2> votos;
 
     public User(String cc) throws Exception {
         this.cc = cc;        
@@ -54,14 +54,14 @@ public class User {
         votos = new ArrayList<>();
     }
 
-    public User(String cc, PublicKey pubKey, PrivateKey privKey,List<Vote> transactions) {
+    public User(String cc, PublicKey pubKey, PrivateKey privKey,List<Vote2> transactions) {
         this.cc = cc;
         this.pubKey = pubKey;
         this.privKey = privKey;       
         this.votos = transactions;
     }
 
-    public void addTransaction(Vote t) throws Exception {
+    public void addTransaction(Vote2 t) throws Exception {
         Files.write(Path.of(getUserFileName(t.getTo())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
         Files.write(Path.of(getUserFileName(t.getFrom())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
         votos.add(t);
@@ -75,7 +75,7 @@ public class User {
                 + "\nPub\t: " + pub
                 + "\nPrv\t: " + priv
                 + "\nTransactions \n";
-        for (Vote transaction : votos) {
+        for (Vote2 transaction : votos) {
             txt += transaction.toString() + "\n";
         }
         return txt;
@@ -94,7 +94,7 @@ public class User {
         out.println(cc);
         out.println(Base64.getEncoder().encodeToString(pubKey.getEncoded()));
         out.println(Base64.getEncoder().encodeToString(SecurityUtils.encrypt(privKey.getEncoded(), password)));       
-        for (Vote transaction : votos) {
+        for (Vote2 transaction : votos) {
             out.println(transaction.toText());
         }
         out.close();
@@ -124,12 +124,12 @@ public class User {
 
         PublicKey pubKey = SecurityUtils.getPublicKey(Base64.getDecoder().decode(pub));
         PrivateKey privKey = null;        
-        List<Vote> votes = new ArrayList<>();
+        List<Vote2> votes = new ArrayList<>();
         //try to load keys 
         try {
             privKey = SecurityUtils.getPrivateKey(SecurityUtils.decrypt(Base64.getDecoder().decode(priv), params[1]));            
             while (file.hasNext()) {
-                votes.add(Vote.fromText(file.nextLine()));
+                votes.add(Vote2.fromText(file.nextLine()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,7 +153,7 @@ public class User {
         return privKey;
     } 
 
-    public List<Vote> getTransactions() {
+    public List<Vote2> getTransactions() {
         return votos;
     }
     

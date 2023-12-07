@@ -15,6 +15,7 @@
 //////////////////////////////////////////////////////////////////////////////
 package distributedMiner.gui;
 
+import client.Vote;
 import distributedMiner.MiningListener;
 import distributedMiner.RemoteObject;
 import java.awt.Color;
@@ -33,8 +34,7 @@ import distributedMiner.blockchain.BlockChain;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import distributedMiner.utils.Serializer;
-import eleicoes.core.Transfer;
-import eleicoes.core.Vote;
+import eleicoes.core.Vote2;
 
 /**
  *
@@ -425,7 +425,8 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         //se estiver algo selecionado
         if (lstTransactions.getSelectedIndex() >= 0) {
             //apresentar a transação
-            Vote t = Vote.fromText(lstTransactions.getSelectedValue());
+           Vote t = Vote.fromText(lstTransactions.getSelectedValue());
+           // Vote2 t = Vote2.fromText(lstTransactions.getSelectedValue());
             txtTransaction.setText(t.toString());
         }
     }//GEN-LAST:event_lstTransactionsValueChanged
@@ -441,7 +442,8 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
             //iterar as transações
             for (String string : lst) {
                 //converter transacoes para tranfer
-                Vote t = (Vote) Serializer.base64ToObject(string);
+               Vote t = (Vote) Serializer.base64ToObject(string);
+               // Vote2 t = (Vote2) Serializer.base64ToObject(string);
                 //adicionar a transfer
                 txt.append("\n:::::::::::::::::\n");
                 txt.append(t.toString()).append("\n");

@@ -15,7 +15,7 @@
 //////////////////////////////////////////////////////////////////////////////
 package eleicoes.blockchain;
 
-import eleicoes.core.Vote;
+import eleicoes.core.Vote2;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -35,7 +35,7 @@ public class BlockChain implements Serializable {
 
     ArrayList<Block> chain = new ArrayList<>();
     //ArrayList temporario para guardar 4 votos para adicionar a um bloco
-    ArrayList<Vote> temp = new ArrayList<>();
+    ArrayList<Vote2> temp = new ArrayList<>();
     
     public ArrayList<Block> getChain() {
         return chain;
@@ -61,7 +61,7 @@ public class BlockChain implements Serializable {
      * @param data data to add in the block
      * @param dificulty dificulty of block to miners (POW)
      */
-    public void add(Vote data, int dificulty) {
+    public void add(Vote2 data, int dificulty) {
         try {
             temp.add(data);
             if (temp.size()==4){

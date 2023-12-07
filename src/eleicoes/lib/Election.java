@@ -7,7 +7,7 @@ package eleicoes.lib;
 import eleicoes.blockchain.Block;
 import eleicoes.blockchain.BlockChain;
 import static eleicoes.blockchain.Converter.objectToByteArray;
-import eleicoes.core.Vote;
+import eleicoes.core.Vote2;
 import static eleicoes.utils.SecurityUtils.verifySign;
 import java.util.ArrayList;
 import java.util.Date;
@@ -217,15 +217,15 @@ public class Election {
         return secureLedger;
     }
       
-    public List<Vote> getLedger() {
-        List<Vote> lst = new ArrayList<>();
+    public List<Vote2> getLedger() {
+        List<Vote2> lst = new ArrayList<>();
         
         for( Block b : secureLedger.getChain()){
             // Remover os colchetes e dividir a string em votos individuais
             String[] votesA = b.getData().substring(1, b.getData().length() - 1).split(",");
             for (String voteString : votesA) {
                 try {
-                    Vote vote = Vote.fromString(voteString.trim());
+                    Vote2 vote = Vote2.fromString(voteString.trim());
                     lst.add(vote);
                 } catch (Exception e) {
                     // Tratar exceção, se necessário
@@ -239,7 +239,7 @@ public class Election {
     @Override
     public String toString() {
         StringBuilder txt = new StringBuilder();
-        for (Vote v : getLedger()) {
+        for (Vote2 v : getLedger()) {
             txt.append(v.toString()).append("\n");
         }
         return txt.toString();
@@ -255,7 +255,7 @@ public class Election {
         return tmp;
     }
     
-    public void addVoteToBlockChain(Vote t) throws Exception {
+    public void addVoteToBlockChain(Vote2 t) throws Exception {
         
         if (isValid(t)) {
             //secureLedger.add(t,dificulty);
@@ -270,7 +270,7 @@ public class Election {
         }
     }
     
-    public boolean isValid(Vote t) throws Exception {
+    public boolean isValid(Vote2 t) throws Exception {
         if (t.getFrom().trim().isEmpty()) {
             throw new Exception("From user is empty");
         }
@@ -278,7 +278,7 @@ public class Election {
             throw new Exception("To user is empty");
         }
         //Verificar assinatura
-        Vote v = new Vote(t.getFrom(),t.getTo(),null);
+        Vote2 v = new Vote2(t.getFrom(),t.getTo(),null);
         return verifySign(objectToByteArray(v), t.getSignatue(), Global.loggedP.getPubKey());
     }
 }
