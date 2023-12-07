@@ -30,9 +30,10 @@ import java.util.logging.Logger;
  * @author IPT - computer
  * @version 1.0
  */
+
 public class MinerP2P {
 
-    //dados de minagem 
+    //dados de minagem
     String data;
     //ticket para com números para testar
     AtomicInteger ticket;
@@ -40,17 +41,18 @@ public class MinerP2P {
     AtomicInteger nonce;
     //listener do mineiro
     MiningListener listener;
-    //array de thread para minar em paralelo 
-    MinerTHR worker;
+    //array de thread para minar em paralelo
+    MinerTHR[] workers; // Array de threads
 
     public MinerP2P(MiningListener listener) {
         this.ticket = new AtomicInteger(0);
         this.nonce = new AtomicInteger(0);
-        this.worker = null;
+        this.workers = null;
         this.listener = listener;
     }
 
     public void startMining(String data, int dificulty) {
+        int numThreads = Runtime.getRuntime().availableProcessors();
         Random rnd = new Random();
         //parar o mineiro se ainda estiver a minar
         stopMining(999);
@@ -58,14 +60,19 @@ public class MinerP2P {
         //começar num numero aleatório
         ticket = new AtomicInteger(Math.abs(rnd.nextInt() + 1));
         nonce = new AtomicInteger(0);
-        //Criar o array de threas e polas a correr
-        worker = new MinerTHR(ticket, nonce, dificulty, data, listener);
-        worker.start();
+        //Criar o array de threads e colocar a correr
+        workers = new MinerTHR[numThreads];
+        for (int i = 0; i < numThreads; i++) {
+            workers[i] = new MinerTHR(ticket, nonce, dificulty, data, listener);
+            workers[i].start();
+        }
     }
 
     public void stopMining(int number) {
-        if (worker != null) {            
-            worker.stop(number);
+        if (workers != null) {
+            for (MinerTHR worker : workers) {
+                worker.stop(number);
+            }
         }
     }
 
@@ -78,23 +85,24 @@ public class MinerP2P {
     }
 
     public boolean isMining() {
-        return worker != null && nonce.get() == 0;
+        return workers != null && nonce.get() == 0;
     }
-    
+
     public int getNonce() {
         return nonce.get();
     }
 
     /**
-     * *
      * Espera que as threads executem terminem o trabalho e devolve o nonce
      *
      * @return
      * @throws Exception
      */
     public int waitToNonce() throws Exception {
-        if (worker != null || worker.isAlive()) {
-            worker.join();
+        if (workers != null) {
+            for (MinerTHR worker : workers) {
+                worker.join();
+            }
             return nonce.get();
         } else {
             throw new Exception("Not mining");
@@ -102,7 +110,7 @@ public class MinerP2P {
     }
 
     //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    //:::::::::      THREAD         :::::::::::::::::::::::::::::::::    
+    //:::::::::      THREAD         :::::::::::::::::::::::::::::::::
     ///////////////////////////////////////////////////////////////////////////
     private class MinerTHR extends Thread {
 
@@ -130,7 +138,7 @@ public class MinerP2P {
             String zeros = String.format("%0" + dificulty + "d", 0);
             int number;
             while (myNonce.get() == 0) {
-                //calculate hash of block   
+                //calculate hash of block
                 number = myTicket.getAndIncrement();
                 //:::::::::::::  L I S T E N E R  ::::::::::::::::::::::::::::::
                 if (System.currentTimeMillis() % 100 == 0) {
@@ -150,7 +158,7 @@ public class MinerP2P {
     }
 
     //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    //:::::::::      I N T E G R I T Y         :::::::::::::::::::::::::::::::::    
+    //:::::::::      I N T E G R I T Y         :::::::::::::::::::::::::::::::::
     ///////////////////////////////////////////////////////////////////////////
     public static String getHash(String data) {
         try {
@@ -162,8 +170,4 @@ public class MinerP2P {
             return data;
         }
     }
-    //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    private static final long serialVersionUID = 202209281113L;
-    //:::::::::::::::::::::::::::  Copyright(c) M@nso  2022  :::::::::::::::::::
-    ///////////////////////////////////////////////////////////////////////////
 }

@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import distributedMiner.utils.Serializer;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -369,7 +370,6 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
             if (dept > maxDep) {
                 return null;
             }
-
             //responder
             flagLastBlock.put(timeStamp, Boolean.TRUE);
         }
@@ -377,17 +377,23 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
         //calcular o ultimo bloco
         List myList = new CopyOnWriteArrayList();
         myList.add(blockchain.getLast());
-        //perguntar à rede
-        //sincronizar a blockchain pela rede
-        for (RemoteInterface node : network) {
-            listener.onConsensus("Get Last Block Lisr", node.getAdress());
-            List resp = node.getLastBlock(timeStamp, dept + 1, maxDep);
-            if (resp != null) {
-                myList.addAll(resp);
+
+        // Usar parallelStream para processar as solicitações de rede de forma paralela
+        List<List> responses = network.parallelStream().map(node -> {
+            try {
+                listener.onConsensus("Get Last Block List", node.getAdress());
+                return node.getLastBlock(timeStamp, dept + 1, maxDep);
+            } catch (RemoteException e) {
+                // Lidar com a exceção aqui
+                return null;
             }
+        }).filter(resp -> resp != null).collect(Collectors.toList());
+        
+        // Adicionar todas as respostas à lista principal
+        for (List resp : responses) {
+            myList.addAll(resp);
         }
         return myList;
-
     }
 
 }

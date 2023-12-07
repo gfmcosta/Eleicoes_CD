@@ -29,12 +29,11 @@ import java.io.Serializable;
  */
 public class Block implements Serializable {
 
-    public static int DIFICULTY = 3;
-
+    public static int DIFICULTY = 4;
     String previous;        // hash do no anterior
     String data;            // dados 
     int numberOfZeros = DIFICULTY;  // número de zeros do hash
-    String hash = "000";     // hash do bloco actual
+    String hash = "000";     // hash do bloco atual
     int nonce = 0;          // numero de validação
 
     /**

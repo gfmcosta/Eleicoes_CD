@@ -3,23 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/gui/ServerMiner.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/blockchain/consensus/LastBlock.java</file>
             <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/gui/Verify.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/gui/RunSystem.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/blockchain/consensus/Histogram.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/lib/Election.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/blockchain/BlockchainException.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/blockchain/BlockChain.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/wallet/User.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/blockchain/Converter.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/gui/VoteMenu.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/RemoteInterface.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/blockchain/Block.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/blockchain/Block.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/gui/ConfigMenu.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/core/Vote.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/core/Transfer.java</file>
         </group>
     </open-files>
 </project-private>
