@@ -18,6 +18,7 @@ package distributedMiner;
 import distributedMiner.blockchain.Block;
 import distributedMiner.blockchain.BlockChain;
 import distributedMiner.blockchain.BlockchainException;
+import distributedMiner.blockchain.MerkleTreeString;
 import distributedMiner.blockchain.consensus.LastBlock;
 import distributedMiner.mining.MinerP2P;
 import distributedMiner.transaction.Transactions;
@@ -32,6 +33,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import distributedMiner.utils.Serializer;
+import eleicoes.lib.Candidate;
 import java.util.stream.Collectors;
 
 /**
@@ -43,14 +45,13 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
     MiningListener listener;
     MinerP2P myMiner;
     Transactions transactions;
-
+    
     public Block miningBlock; // block in mining process
 
     public BlockChain blockchain;
 
     private String address; // nome do servidor
     private List<RemoteInterface> network; // network of miners
-
     /**
      * creates a object listening the port
      *
@@ -69,7 +70,7 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
             network = new CopyOnWriteArrayList<>();
             //inicializar novas transações
             transactions = new Transactions();
-            this.miningBlock = new Block("dummy", "dummy", 1);
+            this.miningBlock = new Block("dummy", "dummy", 1,null);
             //inicializar blockchain
             blockchain = new BlockChain();
 
@@ -290,8 +291,12 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
 
         //dados do bloco são as lista de transaçoes 
         String data = Serializer.objectToBase64(transactions.getList());
+        
+        //Criar merkel Tree
+        MerkleTreeString mk = new MerkleTreeString(transactions.getList());
+        System.out.println(mk.toString());
         //Construir um novo bloco logado ao último
-        Block newBlock = new Block(data, lastHash, Block.DIFICULTY);
+        Block newBlock = new Block(data, lastHash, Block.DIFICULTY, mk);
         //Começar a minar o bloco
         startMiningBlock(newBlock);
     }

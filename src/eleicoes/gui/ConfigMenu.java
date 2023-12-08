@@ -12,6 +12,7 @@ import eleicoes.lib.Election;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
@@ -353,7 +354,7 @@ public class ConfigMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         // Obtém a data de hoje
+        // Obtém a data de hoje
         Date hoje = new Date();
 
         // Cria um objeto Calendar e define-o para a data de hoje

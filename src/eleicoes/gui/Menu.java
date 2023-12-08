@@ -4,6 +4,11 @@
  */
 package eleicoes.gui;
 
+import client.Vote;
+import distributedMiner.RemoteObject;
+import distributedMiner.blockchain.Block;
+import distributedMiner.blockchain.BlockChain;
+import distributedMiner.utils.Serializer;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;
@@ -16,13 +21,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.net.URI;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -417,10 +427,6 @@ public class Menu extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO addVoteToBlockChain your handling code here:
         try{
-        if(Global.eleitoral.getName().equals("")){
-            //is not created yet
-            JOptionPane.showMessageDialog(null, "Ainda não foi criado nenhuma Eleição", "Atenção", JOptionPane.WARNING_MESSAGE);
-        }else{
             //election exist
             Person add = new Person();
             //apelidos list
@@ -492,7 +498,6 @@ public class Menu extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(null, "Eleitores adiconados com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
 
-        }
         }catch(Exception ex){
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro. Contacte o Administrador", "Exceção", JOptionPane.ERROR_MESSAGE);
@@ -523,74 +528,105 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO addVoteToBlockChain your handling code here:
-        Date today = new Date();
-        if(today.after(Global.eleitoral.getDataI()) || today.equals(Global.eleitoral.getDataI()) && today.before(Global.eleitoral.getDataF()) || today.equals(Global.eleitoral.getDataF() )){
-           Global.eleitoral.setFinished(true);
-        //save all info in ficheiros
+        
         try {
-            //create new file
-            String newFileName = System.getProperty("user.dir") + File.separator + "wikiElection" + File.separator + Global.eleitoral.getName()+".txt";
-            new File(newFileName).createNewFile();
-            //write log in file
-            FileWriter writer = new FileWriter(newFileName);
-            writer.write(Global.eleitoral.getName()+"\n");
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            writer.write(formato.format(Global.eleitoral.getDataI())+"\n");
-            writer.write(formato.format(Global.eleitoral.getDataF())+"\n");
-            writer.write("/resources/"+Global.eleitoral.getImage()+"\n");
-            writer.write(Global.eleitoral.isFinished()+"\n");
-            writer.write("-\n");
-            for (Person p : Global.eleitoral.getElector()){
-                writer.write(p.getName()+","+p.getCC()+","+p.getVoted()+","+formato.format(p.getDataNasc())+","+p.getImage()+","+p.getSexo()+"\n");
+            BlockChain blockchain = Global.remote.getBlockchain();
+            
+            // Mapa para armazenar contagens de votos
+            Map<String, Integer> contador = new HashMap<>();
+            for(int i=1;i<blockchain.getChain().size();i++){
+                // Bloco atual
+                Block b = blockchain.getChain().get(i);
+                List<String> lst = (List<String>) Serializer.base64ToObject(b.getData());
+                StringBuilder txt = new StringBuilder(b.getInfo());
+                 //iterar as transações
+                for (String string : lst) {
+                    //converter transacoes para tranfer
+                   Vote t = (Vote) Serializer.base64ToObject(string);
+                    // Atualiza a contagem no mapa
+                    contador.put(t.getTo(), contador.getOrDefault(t.getTo(), 0) + 1);
+                }
+                
+                // Escreve as contagens em um arquivo (exemplo)
+                try (PrintWriter writer = new PrintWriter("contagem_votos.txt")) {
+                    for (Map.Entry<String, Integer> entry : contador.entrySet()) {
+                        writer.println(entry.getKey() + ": " + entry.getValue() + " votos");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace(); // ou lide com a exceção conforme necessário
+                }
             }
-            writer.write("*\n");
-            for (Candidate c : Global.eleitoral.getCandidate()){
-                writer.write(c.getName()+","+c.getAbv()+","+c.getImage()+"\n");
-            }
-            writer.write(".\n");
-           //total votes
-            writer.write(Global.eleitoral.getVotes().size()+"\n");
-           //total votes for all candidates
-           String winner = "Empate";
-           int max=0;
-           for (Candidate c: Global.eleitoral.getCandidate()){
-               int count=0;
-               for (String s:Global.eleitoral.getVotes()){
-                   if(s.equals(c.getAbv())){
-                       //have a vote in votes Array for 'c' candidate
-                       count+=1;
-                   }
-               }
-               writer.write(c.getAbv()+":"+count+"\n");
-               //finding the winner to write in file
-               if(count>max){
-                   max=count;
-                   winner = c.getName();
-               }else if(count==max && c.getAbv()!="VB"){
-                   winner="Empate";
-               }
-           }
-           //Only Blan Votes
-           int count=0;
-               for (String s:Global.eleitoral.getVotes()){
-                   if(s.equals("VB")){
-                       //have a vote in votes Array for 'c' candidate
-                       count+=1;
-                   }
-               }
-               writer.write("VB:"+count+"\n");
-               writer.write(winner);
-            writer.close();
-            Global.eleitoral= new Election();
-            JOptionPane.showMessageDialog(null,"Eleição terminada com sucesso");
-            jButton6.setVisible(false);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }             
-        }else{
-            JOptionPane.showMessageDialog(null,"A data de hoje não corresponde à data de fim.");
+        } catch (RemoteException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+//        Date today = new Date();
+//        if(today.after(Global.eleitoral.getDataI()) || today.equals(Global.eleitoral.getDataI()) && today.before(Global.eleitoral.getDataF()) || today.equals(Global.eleitoral.getDataF() )){
+//           Global.eleitoral.setFinished(true);
+//        //save all info in ficheiros
+//        try {
+//            //create new file
+//            String newFileName = System.getProperty("user.dir") + File.separator + "wikiElection" + File.separator + Global.eleitoral.getName()+".txt";
+//            new File(newFileName).createNewFile();
+//            //write log in file
+//            FileWriter writer = new FileWriter(newFileName);
+//            writer.write(Global.eleitoral.getName()+"\n");
+//            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+//            writer.write(formato.format(Global.eleitoral.getDataI())+"\n");
+//            writer.write(formato.format(Global.eleitoral.getDataF())+"\n");
+//            writer.write("/resources/"+Global.eleitoral.getImage()+"\n");
+//            writer.write(Global.eleitoral.isFinished()+"\n");
+//            writer.write("-\n");
+//            for (Person p : Global.eleitoral.getElector()){
+//                writer.write(p.getName()+","+p.getCC()+","+p.getVoted()+","+formato.format(p.getDataNasc())+","+p.getImage()+","+p.getSexo()+"\n");
+//            }
+//            writer.write("*\n");
+//            for (Candidate c : Global.eleitoral.getCandidate()){
+//                writer.write(c.getName()+","+c.getAbv()+","+c.getImage()+"\n");
+//            }
+//            writer.write(".\n");
+//           //total votes
+//            writer.write(Global.eleitoral.getVotes().size()+"\n");
+//           //total votes for all candidates
+//           String winner = "Empate";
+//           int max=0;
+//           for (Candidate c: Global.eleitoral.getCandidate()){
+//               int count=0;
+//               for (String s:Global.eleitoral.getVotes()){
+//                   if(s.equals(c.getAbv())){
+//                       //have a vote in votes Array for 'c' candidate
+//                       count+=1;
+//                   }
+//               }
+//               writer.write(c.getAbv()+":"+count+"\n");
+//               //finding the winner to write in file
+//               if(count>max){
+//                   max=count;
+//                   winner = c.getName();
+//               }else if(count==max && c.getAbv()!="VB"){
+//                   winner="Empate";
+//               }
+//           }
+//           //Only Blan Votes
+//           int count=0;
+//               for (String s:Global.eleitoral.getVotes()){
+//                   if(s.equals("VB")){
+//                       //have a vote in votes Array for 'c' candidate
+//                       count+=1;
+//                   }
+//               }
+//               writer.write("VB:"+count+"\n");
+//               writer.write(winner);
+//            writer.close();
+//            Global.eleitoral= new Election();
+//            JOptionPane.showMessageDialog(null,"Eleição terminada com sucesso");
+//            jButton6.setVisible(false);
+//        } catch (IOException ex) {
+//            JOptionPane.showMessageDialog(this, ex.getMessage());
+//        }             
+//        }else{
+//            JOptionPane.showMessageDialog(null,"A data de hoje não corresponde à data de fim.");
+//        }
+        
         
     }//GEN-LAST:event_jButton6ActionPerformed
     

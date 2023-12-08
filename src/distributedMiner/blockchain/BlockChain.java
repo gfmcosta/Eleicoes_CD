@@ -48,7 +48,7 @@ public class BlockChain implements Serializable {
             //criar uma nova blockchain
             chain = new CopyOnWriteArrayList<>();
             //introduzir um bloco vazio
-            Block b = new Block("First Block", "Empty", 1);
+            Block b = new Block("First Block", "Empty", 1,null);
             chain.add(b);
         }
 

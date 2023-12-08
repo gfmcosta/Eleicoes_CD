@@ -17,8 +17,10 @@ package distributedMiner;
 
 import distributedMiner.blockchain.Block;
 import distributedMiner.blockchain.BlockChain;
+import eleicoes.lib.Candidate;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -98,5 +100,6 @@ public interface RemoteInterface extends Remote {
     //:::::                                                         :::::::::::::
     //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     public List getLastBlock(long timeStamp, int dept, int maxDep) throws RemoteException;
+
 
 }

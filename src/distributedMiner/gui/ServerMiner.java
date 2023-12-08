@@ -442,7 +442,6 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
             for (String string : lst) {
                 //converter transacoes para tranfer
                Vote t = (Vote) Serializer.base64ToObject(string);
-               // Vote2 t = (Vote2) Serializer.base64ToObject(string);
                 //adicionar a transfer
                 txt.append("\n:::::::::::::::::\n");
                 txt.append(t.toString()).append("\n");

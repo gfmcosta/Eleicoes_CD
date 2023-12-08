@@ -22,6 +22,9 @@ package distributedMiner.blockchain;
 
 import distributedMiner.mining.MinerP2P;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
  *
@@ -35,20 +38,22 @@ public class Block implements Serializable {
     int numberOfZeros = DIFICULTY;  // número de zeros do hash
     String hash = "000";     // hash do bloco atual
     int nonce = 0;          // numero de validação
-
+    MerkleTreeString mk;
     /**
      * cria um bloco
      *
      * @param message dados do bloco
      * @param previous hash do bloco anterior
      * @param zeros numero de zeros
+     * @param mk merkel tree
      */
-    public Block(String message, String previous, int zeros) {
+    public Block(String message, String previous, int zeros, MerkleTreeString mk) {
         try {
             this.data = message;
             this.previous = previous;
             this.numberOfZeros = zeros;
             this.nonce = 0;
+            this.mk =mk;
             this.hash = MinerP2P.getHash(getMiningData());
         } catch (Exception ex) {
         }
