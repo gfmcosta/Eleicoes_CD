@@ -15,7 +15,6 @@
 //////////////////////////////////////////////////////////////////////////////
 package client;
 
-import eleicoes.core.*;
 import java.io.Serializable;
 import distributedMiner.utils.Serializer;
 

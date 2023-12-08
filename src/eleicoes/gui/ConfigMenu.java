@@ -7,7 +7,7 @@ package eleicoes.gui;
 import distributedMiner.RemoteInterface;
 import distributedMiner.utils.RMI;
 import eleicoes.lib.Global;
-import eleicoes.lib.Candidate;
+import distributedMiner.blockchain.Candidate;
 import eleicoes.lib.Election;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -375,6 +375,8 @@ public class ConfigMenu extends javax.swing.JDialog {
             String ip="//192.168.169.11:10010/RemoteMiner";
             Global.remote = (RemoteInterface) RMI.getRemote(ip);
             System.out.println("Connected to "+ ip);
+            Global.remote.addCandidates(Global.eleitoral.getCandidate());
+
         } catch (Exception e) {
             System.out.println("Connect to server " + e);
         }

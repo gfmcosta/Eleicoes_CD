@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/gui/Verify.java</file>
+            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/lib/Election.java</file>
+            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/gui/ServerMiner.java</file>
+            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/client/Vote.java</file>
+            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/RemoteObject.java</file>
+            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/blockchain/Candidate.java</file>
+            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/RemoteInterface.java</file>
+            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/gui/ElectorAdd.java</file>
             <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/gui/ConfigMenu.java</file>
-            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/gui/Menu.java</file>
+            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/eleicoes/lib/Global.java</file>
+            <file>file:/C:/Users/gonca/Downloads/Eleicoes_CD/src/distributedMiner/MiningListener.java</file>
         </group>
     </open-files>
 </project-private>

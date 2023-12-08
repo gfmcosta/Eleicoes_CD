@@ -15,6 +15,8 @@
 //////////////////////////////////////////////////////////////////////////////
 package distributedMiner;
 
+import distributedMiner.blockchain.Candidate;
+
 /**
  * Created on 29/11/2023, 07:47:26
  *
@@ -45,6 +47,8 @@ public interface MiningListener {
     
     public void onConsensus(String title, String desc);
     
+    
 
-
+    
+    public void onUpdateCandidate();
 }

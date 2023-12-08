@@ -7,7 +7,7 @@ package eleicoes.gui;
 import distributedMiner.RemoteInterface;
 import distributedMiner.utils.RMI;
 import eleicoes.lib.Global;
-import eleicoes.lib.Candidate;
+import distributedMiner.blockchain.Candidate;
 import eleicoes.lib.Election;
 import eleicoes.lib.Person;
 import java.awt.Image;

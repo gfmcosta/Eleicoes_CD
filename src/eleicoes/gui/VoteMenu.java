@@ -7,7 +7,7 @@ package eleicoes.gui;
 import client.Vote;
 import distributedMiner.utils.Converter;
 import eleicoes.lib.Global;
-import eleicoes.lib.Candidate;
+import distributedMiner.blockchain.Candidate;
 import eleicoes.utils.SecurityUtils;
 import java.awt.Image;
 import java.awt.TextArea;

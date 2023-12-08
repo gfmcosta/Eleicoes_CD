@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import distributedMiner.utils.Serializer;
-import eleicoes.lib.Candidate;
+import distributedMiner.blockchain.Candidate;
 import java.util.stream.Collectors;
 
 /**
@@ -45,6 +45,7 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
     MiningListener listener;
     MinerP2P myMiner;
     Transactions transactions;
+    ArrayList<Candidate> candidates;
     
     public Block miningBlock; // block in mining process
 
@@ -73,6 +74,9 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
             this.miningBlock = new Block("dummy", "dummy", 1,null);
             //inicializar blockchain
             blockchain = new BlockChain();
+            
+            //inicializar candidates
+            candidates = new ArrayList<>();
 
             listener.onStartServer(distributedMiner.utils.RMI.getRemoteName(port, RemoteInterface.OBJECT_NAME));
         } catch (Exception e) {
@@ -401,4 +405,47 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
         return myList;
     }
 
+    
+    
+    @Override
+    public void addCandidates(ArrayList<Candidate> candidates) throws RemoteException {
+        //se já tiver a transação não faz nada
+        
+            
+            if (this.candidates.size() == candidates.size()) {
+                return;
+            }
+
+            this.candidates.addAll(candidates);
+            listener.onUpdateCandidate();
+            listener.onMessage("addTransaction", getClientName());
+        
+                //sincronizar a transacao
+                for (RemoteInterface node : network) {
+                    node.synchonizeCandidates(candidates);
+                }
+        
+    }
+
+    @Override
+    public ArrayList<Candidate> getCandidatesList() throws RemoteException {
+        return candidates;
+    }
+
+    @Override
+    public void synchonizeCandidates(ArrayList<Candidate> list) throws RemoteException {
+        if (this.candidates.size() == list.size()) {
+                return;
+            }
+        
+        addCandidates(list);
+        
+        //mandar sincronizar a rede
+        for (RemoteInterface node : network) {
+            node.synchonizeCandidates(candidates);
+        }
+        listener.onMessage("synchonizeCandidates", getClientName());
+
+    }
+    
 }
