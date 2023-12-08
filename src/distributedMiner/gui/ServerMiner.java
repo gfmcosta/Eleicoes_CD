@@ -525,6 +525,16 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
 
     private void lstCandidatesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstCandidatesValueChanged
         // TODO add your handling code here:
+        if (lstCandidates.getSelectedIndex() >= 0) {
+            try {
+                //candidato selecionado
+                Candidate c = myRemote.getCandidatesList().get(lstCandidates.getSelectedIndex());
+                
+                txtCandidates.setText(c.getInfo());
+            } catch (RemoteException ex) {
+                Logger.getLogger(ServerMiner.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_lstCandidatesValueChanged
 
     /**
@@ -798,7 +808,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
                 //atualizar os elementos da lista
                 DefaultListModel<String> model = new DefaultListModel<>();
                 for (int i = 0; i < myRemote.getCandidatesList().size(); i++) {
-                    model.addElement(myRemote.getCandidatesList().get(i).getName());
+                    model.addElement(myRemote.getCandidatesList().get(i).getAbv());
                 }
                 lstCandidates.setModel(model);
                 //selecionar o último bloco

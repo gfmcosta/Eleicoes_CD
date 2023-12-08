@@ -372,7 +372,7 @@ public class ConfigMenu extends javax.swing.JDialog {
         
         try {
             //Alterar para o ip da máquina servidor
-            String ip="//192.168.169.11:10010/RemoteMiner";
+            String ip="//10.10.192.103:10010/RemoteMiner";
             Global.remote = (RemoteInterface) RMI.getRemote(ip);
             System.out.println("Connected to "+ ip);
             Global.remote.addCandidates(Global.eleitoral.getCandidate());

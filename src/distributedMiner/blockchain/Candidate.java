@@ -103,4 +103,10 @@ import java.io.Serializable;
         this.image = image;
     }
     
+    
+    public String getInfo() {
+        return "Nome:" + name
+                + "\nAbreviatura    :" + abv;
+    }
+    
 }
