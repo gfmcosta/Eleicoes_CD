@@ -159,16 +159,15 @@ public class VoteMenu extends javax.swing.JDialog {
                     }
                     
                     try {
-                        //Global.eleitoral.addVoteToBlockChain(v);
+                        Global.eleitoral.addVoteToBlockChain(v);
                         //Vote t = new Vote(Global.loggedP.getName(), vote, 1);
-                        Global.remote.addTransaction(v.toText());
+                        //Global.remote.addTransaction(v.toText());
                         System.out.println(Global.eleitoral.toString());
+                        JOptionPane.showMessageDialog(null, "Obrigado por votar "+Global.loggedP.getName()+"!", "Voto", JOptionPane.INFORMATION_MESSAGE);
+                        dispose();
                     } catch (Exception ex) {
                         Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    JOptionPane.showMessageDialog(null, "Obrigado por votar "+Global.loggedP.getName()+"!", "Voto", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
                 }
             });
             add(bt1);

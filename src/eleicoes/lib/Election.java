@@ -10,6 +10,7 @@ import client.Vote;
 import static distributedMiner.utils.Converter.objectToByteArray;
 import static eleicoes.utils.SecurityUtils.verifySign;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -207,13 +208,7 @@ public class Election {
     public void setVotes(ArrayList<String> votes) {
         this.votes = votes;
     }
-    
-    
-    
-    
-     
-     
-    
+ 
     public void addVoteToBlockChain(Vote t) throws Exception {
         
         if (isValid(t)) {
@@ -237,8 +232,12 @@ public class Election {
             throw new Exception("To user is empty");
         }
         //Verificar assinatura
-        Vote v = new Vote(t.getFrom(),t.getTo(),null);
-        return verifySign(objectToByteArray(v), objectToByteArray(t.getSign()), Global.loggedP.getPubKey());
+        Vote v = new Vote(t.getFrom(),t.getTo());
+        
+        // Assumindo que assinaturaString é a String da assinatura recebida
+        byte[] assinatura = Base64.getDecoder().decode(t.getSign());
+
+        return verifySign(objectToByteArray(v), assinatura, Global.loggedP.getPubKey());
     }
 }
 
