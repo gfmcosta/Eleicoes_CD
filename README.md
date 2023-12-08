@@ -3,7 +3,7 @@ Project for Distribuit Computing IPT
 ELECTION
 
 # TODO
-  -  Passar candidatos para o remote
+  -  Listar os candidados no menu Vote apartir do remote
   -  Passar eleitores para o remote
   -  Passar o finalizar eleição para o remote (verificar que quando finalizar deve adicionar o ultimo bloco mesmo que so tenha um voto):            
   -  Passar informação dos botões teste para os botões reais
