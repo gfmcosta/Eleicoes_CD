@@ -477,6 +477,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
             node = (RemoteInterface) RMI.getRemote(txtNodeAdress.getText());
             myRemote.addNode(node);
             myRemote.synchonizeTransactions(node.getTransactionsList());
+            myRemote.synchonizeCandidates(node.getCandidatesList());
         } catch (Exception ex) {
             onException("Add Node", ex);
         }
@@ -669,6 +670,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
             //atualizar as transacoes e a blockchain
             onUpdateTransactions(null);
             onUpdateBlockchain();
+            onUpdateCandidate();
         });
     }
 

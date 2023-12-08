@@ -11,6 +11,7 @@ import distributedMiner.blockchain.Candidate;
 import eleicoes.utils.SecurityUtils;
 import java.awt.Image;
 import java.awt.TextArea;
+import java.rmi.RemoteException;
 import java.security.Key;
 import java.util.Base64;
 import java.util.logging.Level;
@@ -33,118 +34,152 @@ public class VoteMenu extends javax.swing.JDialog {
      */
     public VoteMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        JLabel l;
-        JLabel l2;
-        JLabel l3;
-        JRadioButton j1;
-        JButton bt1;
-        int y=0;
-        initComponents();
-        for (Candidate c : Global.eleitoral.getCandidate()){
-            //name label
-        l = new JLabel(c.getName());
-        l.setBounds(6,98+y,192,50);
-        l.setFont(new java.awt.Font("Segoe UI", 3, 11));
-        l.setDoubleBuffered(true);
-        add(l);
-        //abv label
-        l2 = new JLabel(c.getAbv());
-        l2.setBounds(225,116+y,39,15);
-        l2.setFont(new java.awt.Font("Segoe UI", 3, 11));
-        l2.setDoubleBuffered(true);
-        add(l2);
-        //image label
-        l3 = new JLabel("");
-        l3.setBounds(302,98+y,50,50);
-        ImageIcon i = new javax.swing.ImageIcon(getClass().getResource(c.getImage()));
-        Image img = i.getImage().getScaledInstance(l3.getWidth(), l3.getHeight(), Image.SCALE_SMOOTH);
-        l3.setIcon(new ImageIcon(img));
-        l3.setDoubleBuffered(true);
-        add(l3);
-        //radioButton
-        j1=new JRadioButton();
-        j1.setBounds(391,110+y,30,32);
-        j1.setActionCommand(c.getAbv());
-        buttonGroup1.add(j1);
-        add(j1);
-        y+=50;
+        try {
+            JLabel l;
+            JLabel l2;
+            JLabel l3;
+            JRadioButton j1;
+            JButton bt1;
+            int y=0;
+            initComponents();
+            for (Candidate c : Global.remote.getCandidatesList()){
+                //name label
+                l = new JLabel(c.getName());
+                l.setBounds(6,98+y,192,50);
+                l.setFont(new java.awt.Font("Segoe UI", 3, 11));
+                l.setDoubleBuffered(true);
+                add(l);
+                //abv label
+                l2 = new JLabel(c.getAbv());
+                l2.setBounds(225,116+y,39,15);
+                l2.setFont(new java.awt.Font("Segoe UI", 3, 11));
+                l2.setDoubleBuffered(true);
+                add(l2);
+                //image label
+                l3 = new JLabel("");
+                l3.setBounds(302,98+y,50,50);
+                ImageIcon i = new javax.swing.ImageIcon(getClass().getResource(c.getImage()));
+                Image img = i.getImage().getScaledInstance(l3.getWidth(), l3.getHeight(), Image.SCALE_SMOOTH);
+                l3.setIcon(new ImageIcon(img));
+                l3.setDoubleBuffered(true);
+                add(l3);
+                //radioButton
+                j1=new JRadioButton();
+                j1.setBounds(391,110+y,30,32);
+                j1.setActionCommand(c.getAbv());
+                buttonGroup1.add(j1);
+                add(j1);
+                y+=50;
+            }
+            
+//            for (Candidate c : Global.eleitoral.getCandidate()){
+//                //name label
+//                l = new JLabel(c.getName());
+//                l.setBounds(6,98+y,192,50);
+//                l.setFont(new java.awt.Font("Segoe UI", 3, 11));
+//                l.setDoubleBuffered(true);
+//                add(l);
+//                //abv label
+//                l2 = new JLabel(c.getAbv());
+//                l2.setBounds(225,116+y,39,15);
+//                l2.setFont(new java.awt.Font("Segoe UI", 3, 11));
+//                l2.setDoubleBuffered(true);
+//                add(l2);
+//                //image label
+//                l3 = new JLabel("");
+//                l3.setBounds(302,98+y,50,50);
+//                ImageIcon i = new javax.swing.ImageIcon(getClass().getResource(c.getImage()));
+//                Image img = i.getImage().getScaledInstance(l3.getWidth(), l3.getHeight(), Image.SCALE_SMOOTH);
+//                l3.setIcon(new ImageIcon(img));
+//                l3.setDoubleBuffered(true);
+//                add(l3);
+//                //radioButton
+//                j1=new JRadioButton();
+//                j1.setBounds(391,110+y,30,32);
+//                j1.setActionCommand(c.getAbv());
+//                buttonGroup1.add(j1);
+//                add(j1);
+//                y+=50;
+//            }
+            //blank Vote2 option
+            l = new JLabel("Votar em Branco");
+            l.setBounds(6,98+y,192,50);
+            l.setFont(new java.awt.Font("Segoe UI", 3, 11));
+            l.setDoubleBuffered(true);
+            add(l);
+            //abv label
+            l2 = new JLabel("VB");
+            l2.setBounds(225,116+y,39,15);
+            l2.setFont(new java.awt.Font("Segoe UI", 3, 11));
+            l2.setDoubleBuffered(true);
+            add(l2);
+            //image label
+            l3 = new JLabel("");
+            l3.setBounds(302,98+y,50,50);
+            ImageIcon i = new javax.swing.ImageIcon(getClass().getResource("/resources/nulo.png"));
+            Image img = i.getImage().getScaledInstance(l3.getWidth(), l3.getHeight(), Image.SCALE_SMOOTH);
+            l3.setIcon(new ImageIcon(img));
+            l3.setDoubleBuffered(true);
+            add(l3);
+            //radioButton
+            j1=new JRadioButton();
+            j1.setBounds(391,110+y,30,32);
+            j1.setActionCommand("VB");
+            buttonGroup1.add(j1);
+            add(j1);
+            y+=155;
+            //confirm button
+            bt1= new JButton();
+            bt1.setBounds(339,y,117,28);
+            bt1.setText("Confirmar Voto");
+            bt1.setFont(new java.awt.Font("Segoe UI", 3, 12));
+            bt1.addMouseListener(new java.awt.event.MouseAdapter() {
+                //creating the mousclicked event
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    //add the personal vote
+                    String vote=buttonGroup1.getSelection().getActionCommand();
+                    Global.eleitoral.addListVotes(vote);
+                    Global.loggedP.setVoted(true);
+                    
+                    //Cria um voto
+                    //From: CC da pessoa encriptado com a chave publica
+                    //To: String abreviatura do candidato
+                    //Signature: Assinaturado objeto Voto com a chave privada da pessoa (O voto tem apenas from e to nesta instância com assinatura a null)
+                    Vote v =null;
+                    try {
+                        byte[] eleitor = SecurityUtils.encrypt(Converter.objectToByteArray(Global.loggedP.getCC()), Global.loggedP.getPubKey());
+                        String eleitorString = Base64.getEncoder().encodeToString(eleitor);
+                        v = new Vote(eleitorString, vote);
+                        byte[] assinatura = SecurityUtils.sign(Converter.objectToByteArray(v), Global.loggedP.getPrivKey());
+                        String assinaturaString = Base64.getEncoder().encodeToString(assinatura);
+                        v= new Vote(eleitorString, vote,assinaturaString);
+                    } catch (Exception ex) {
+                        Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    try {
+                        //Global.eleitoral.addVoteToBlockChain(v);
+                        //Vote t = new Vote(Global.loggedP.getName(), vote, 1);
+                        Global.remote.addTransaction(v.toText());
+                        System.out.println(Global.eleitoral.toString());
+                    } catch (Exception ex) {
+                        Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    JOptionPane.showMessageDialog(null, "Obrigado por votar "+Global.loggedP.getName()+"!", "Voto", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                }
+            });
+            add(bt1);
+            setBounds(getX(), getY(), getWidth(), y+80);
+            
+            i = new javax.swing.ImageIcon(getClass().getResource("/resources/elections (1).png"));
+            img = i.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            setIconImage(img);
+        } catch (RemoteException ex) {
+            Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //blank Vote2 option
-        l = new JLabel("Votar em Branco");
-        l.setBounds(6,98+y,192,50);
-        l.setFont(new java.awt.Font("Segoe UI", 3, 11));
-        l.setDoubleBuffered(true);
-        add(l);
-        //abv label
-        l2 = new JLabel("VB");
-        l2.setBounds(225,116+y,39,15);
-        l2.setFont(new java.awt.Font("Segoe UI", 3, 11));
-        l2.setDoubleBuffered(true);
-        add(l2);
-        //image label
-        l3 = new JLabel("");
-        l3.setBounds(302,98+y,50,50);
-        ImageIcon i = new javax.swing.ImageIcon(getClass().getResource("/resources/nulo.png"));
-        Image img = i.getImage().getScaledInstance(l3.getWidth(), l3.getHeight(), Image.SCALE_SMOOTH);
-        l3.setIcon(new ImageIcon(img));
-        l3.setDoubleBuffered(true);
-        add(l3);
-        //radioButton
-        j1=new JRadioButton();
-        j1.setBounds(391,110+y,30,32);
-        j1.setActionCommand("VB");
-        buttonGroup1.add(j1);
-        add(j1);
-        y+=155;
-        //confirm button
-        bt1= new JButton();
-        bt1.setBounds(339,y,117,28);
-        bt1.setText("Confirmar Voto");
-        bt1.setFont(new java.awt.Font("Segoe UI", 3, 12));
-        bt1.addMouseListener(new java.awt.event.MouseAdapter() {
-            //creating the mousclicked event
-               @Override
-               public void mouseClicked(java.awt.event.MouseEvent evt) {
-                   //add the personal vote
-                   String vote=buttonGroup1.getSelection().getActionCommand();
-                   Global.eleitoral.addListVotes(vote);
-                   Global.loggedP.setVoted(true);
-                   
-                   //Cria um voto
-                   //From: CC da pessoa encriptado com a chave publica 
-                   //To: String abreviatura do candidato
-                   //Signature: Assinaturado objeto Voto com a chave privada da pessoa (O voto tem apenas from e to nesta instância com assinatura a null)                  
-                   Vote v =null;                            
-                   try {
-                       byte[] eleitor = SecurityUtils.encrypt(Converter.objectToByteArray(Global.loggedP.getCC()), Global.loggedP.getPubKey());
-                       String eleitorString = Base64.getEncoder().encodeToString(eleitor);
-                       v = new Vote(eleitorString, vote);
-                       byte[] assinatura = SecurityUtils.sign(Converter.objectToByteArray(v), Global.loggedP.getPrivKey());
-                       String assinaturaString = Base64.getEncoder().encodeToString(assinatura);
-                       v= new Vote(eleitorString, vote,assinaturaString);
-                   } catch (Exception ex) {
-                       Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
-                   }
-                   
-                   try {
-                      //Global.eleitoral.addVoteToBlockChain(v);
-                      //Vote t = new Vote(Global.loggedP.getName(), vote, 1);
-                      Global.remote.addTransaction(v.toText());
-                      System.out.println(Global.eleitoral.toString());
-                   } catch (Exception ex) {
-                       Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
-                   }
-                   
-                   JOptionPane.showMessageDialog(null, "Obrigado por votar "+Global.loggedP.getName()+"!", "Voto", JOptionPane.INFORMATION_MESSAGE);
-                   dispose();
-               }
-        });
-        add(bt1);
-        setBounds(getX(), getY(), getWidth(), y+80);
-        
-        i = new javax.swing.ImageIcon(getClass().getResource("/resources/elections (1).png"));
-        img = i.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        setIconImage(img);
     }
 
     /**
