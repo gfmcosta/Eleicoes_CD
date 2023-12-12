@@ -12,8 +12,11 @@ import eleicoes.lib.Election;
 import eleicoes.lib.Person;
 import java.awt.Image;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,15 +41,26 @@ public class Verify extends javax.swing.JFrame {
      */
         
     public Verify() {
-        initComponents();
-        if(Global.isFirst){
-            deleteFiles();
-            Global.isFirst=false;
-        }
+        try {
+            initComponents();
+            if(Global.isFirst){
+                //Alterar para o ip da máquina servidor
+                Global.remote = (RemoteInterface) RMI.getRemote(Global.ip);
+                System.out.println("Connected to "+ Global.ip);
+                deleteFiles();
+                Global.isFirst=false;
+            }
             
-        ImageIcon i = new javax.swing.ImageIcon(getClass().getResource("/resources/upload.png"));
-        Image img = i.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-        jLabel8.setIcon(new ImageIcon(img));
+            ImageIcon i = new javax.swing.ImageIcon(getClass().getResource("/resources/upload.png"));
+            Image img = i.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+            jLabel8.setIcon(new ImageIcon(img));
+        } catch (NotBoundException ex) {
+            Logger.getLogger(Verify.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Verify.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Verify.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     

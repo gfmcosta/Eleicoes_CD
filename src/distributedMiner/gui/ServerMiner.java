@@ -35,6 +35,7 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import distributedMiner.utils.Serializer;
 import eleicoes.lib.Candidate;
+import eleicoes.lib.Person;
 
 /**
  *
@@ -456,7 +457,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
 
         pnElectors.setLayout(new java.awt.BorderLayout());
 
-        pnElectorsTop3.setLayout(new java.awt.GridLayout());
+        pnElectorsTop3.setLayout(new java.awt.GridLayout(1, 0));
 
         pnLabelLeft3.setLayout(new java.awt.BorderLayout());
 
@@ -603,6 +604,16 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
 
     private void lstElectorsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstElectorsValueChanged
         // TODO add your handling code here:
+        if (lstElectors.getSelectedIndex() >= 0) {
+            try {
+                //candidato selecionado
+                Person p = myRemote.getElection().getElector().get(lstElectors.getSelectedIndex());
+                
+                txtElectors.setText(p.getInfo());
+            } catch (RemoteException ex) {
+                Logger.getLogger(ServerMiner.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_lstElectorsValueChanged
 
     /**
@@ -884,7 +895,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
     public void onUpdateElection() {
         EventQueue.invokeLater(() -> {
             try {
-                //atualizar os elementos da lista
+                //::::::::::::::::::::::::: CANDIDATOS :::::::::::::::::::::::::::::::
                 DefaultListModel<String> model = new DefaultListModel<>();
                 for (int i = 0; i < myRemote.getElection().getCandidate().size(); i++) {
                     model.addElement(myRemote.getElection().getCandidate().get(i).getAbv());
@@ -893,7 +904,17 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
                 //selecionar o último bloco
                 lstCandidates.setSelectedValue(myRemote.getElection().getCandidate().size() - 1, true);
                 tpMain.setSelectedComponent(pnCandidates1);
-
+                
+                //::::::::::::::::::::::::: ELEITORE :::::::::::::::::::::::::::::::::
+                model = new DefaultListModel<>();
+                for (int i = 0; i < myRemote.getElection().getElector().size(); i++) {
+                    model.addElement(myRemote.getElection().getElector().get(i).getCC()+" - "+ myRemote.getElection().getElector().get(i).getName());
+                }
+                lstElectors.setModel(model);
+                //selecionar o último bloco
+                lstElectors.setSelectedValue(myRemote.getElection().getElector().size() - 1, true);
+                tpMain.setSelectedComponent(pnElectors);
+                
             } catch (RemoteException ex) {
                 onException("onReceiveCandidates", ex);
             }

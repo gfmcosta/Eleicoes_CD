@@ -466,8 +466,8 @@ public class Menu extends javax.swing.JFrame {
             fr.close();
             //final of lists
             
-            for (int i = 0; i < 50; i++) {
-                if(i>=25){
+            for (int i = 0; i < 10; i++) {
+                if(i>=5){
                     add=add.randomPerson('F',apelidos,nomesF);
                     if(add.getName().equals("")){
                         JOptionPane.showMessageDialog(null, "Erro ao adicionar Eleitor", "Atenção", JOptionPane.WARNING_MESSAGE);
@@ -476,6 +476,7 @@ public class Menu extends javax.swing.JFrame {
                         
                         //chaves
                         add.save(add.getPassword());
+                        add.setPrivKey(null);
                         Global.eleitoral.addListElector(add);
                         System.out.println(add.getName());
                      //   JOptionPane.showMessageDialog(null, "Eleitor: "+addVoteToBlockChain.getName()+" adiconado com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
@@ -489,6 +490,7 @@ public class Menu extends javax.swing.JFrame {
                         
                         //chaves
                         add.save(add.getPassword());
+                        add.setPrivKey(null);
                         Global.eleitoral.addListElector(add);
                         
                         System.out.println(add.getName());
@@ -511,11 +513,15 @@ public class Menu extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO addVoteToBlockChain your handling code here:
         if(Global.isAdmin==true){
-            if(Global.eleitoral.getName().equals("")){
-                //is not created
-            }else{
-               jButton6.setVisible(true);
-            
+            try {
+                if(Global.remote.getElection().getName().equals("")){
+                    //is not created
+                }else{
+                    jButton6.setVisible(true);
+                    
+                }
+            } catch (RemoteException ex) {
+                java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }else{
         if(Global.loggedP.getVoted()==true){

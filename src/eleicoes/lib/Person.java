@@ -352,9 +352,21 @@ public class Person implements Serializable{
 
     public PrivateKey getPrivKey() {
         return privKey;
-    } 
+    }
+    
+    public void setPrivKey(PrivateKey pk) {
+        this.privKey = pk; 
+    }
 
     public List<Vote> getTransactions() {
         return votos;
+    }
+    
+    public String getInfo() {
+        return "CC:    " + cc
+                + "\nNome    :" + name
+                + "\nDataNasc    :" + dataNasc
+                + "\nSexo    :" + sexo
+                + "\nPubKey    :" + Base64.getEncoder().encodeToString(pubKey.getEncoded());
     }
 }

@@ -367,12 +367,8 @@ public class ConfigMenu extends javax.swing.JDialog {
         Global.eleitoral.setName("Eleicao de Testes");
         Global.eleitoral.setDataI(hoje);
         Global.eleitoral.setDataF(amanha);
-        Global.eleitoral.setImage("info.png");        
+        Global.eleitoral.setImage("info.png"); 
         try {
-            //Alterar para o ip da máquina servidor
-            
-            Global.remote = (RemoteInterface) RMI.getRemote(Global.ip);
-            System.out.println("Connected to "+ Global.ip);
             Global.remote.addElection(Global.eleitoral);
             JOptionPane.showMessageDialog(null, "Eleição criada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             dispose();
