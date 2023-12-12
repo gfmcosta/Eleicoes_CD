@@ -139,7 +139,11 @@ public class VoteMenu extends javax.swing.JDialog {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     //add the personal vote
                     String vote=buttonGroup1.getSelection().getActionCommand();
-                    Global.eleitoral.addListVotes(vote);
+                    try {
+                        Global.remote.getElection().addListVotes(vote);
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     Global.loggedP.setVoted(true);
                     
                     //Cria um voto
@@ -159,10 +163,9 @@ public class VoteMenu extends javax.swing.JDialog {
                     }
                     
                     try {
-                        Global.eleitoral.addVoteToBlockChain(v);
+                        Global.remote.getElection().addVoteToBlockChain(v);
                         //Vote t = new Vote(Global.loggedP.getName(), vote, 1);
                         //Global.remote.addTransaction(v.toText());
-                        System.out.println(Global.eleitoral.toString());
                         JOptionPane.showMessageDialog(null, "Obrigado por votar "+Global.loggedP.getName()+"!", "Voto", JOptionPane.INFORMATION_MESSAGE);
                         dispose();
                     } catch (Exception ex) {

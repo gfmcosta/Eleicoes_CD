@@ -223,7 +223,7 @@ public class Verify extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
         }else{
             //textField1 isnt null
-        for(Person p : Global.eleitoral.getElector()){
+        for(Person p : Global.remote.getElection().getElector()){
             if(p.getCC().equals(ccn) && p.getVoted()==false){
                 
                //can vote

@@ -378,13 +378,13 @@ public class Menu extends javax.swing.JFrame {
         // TODO addVoteToBlockChain your handling code here:
         
         try{
-        if(Global.eleitoral.getName().equals("")){
+        if(Global.remote.getElection().getName().equals("")){
             //is not created yet
             JOptionPane.showMessageDialog(null, "Ainda não foi criado nenhuma Eleição", "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
             //election exist
             Date today = new Date();
-            if(today.after(Global.eleitoral.getDataI()) || today.equals(Global.eleitoral.getDataI()) ){
+            if(today.after(Global.remote.getElection().getDataI()) || today.equals(Global.remote.getElection().getDataI()) ){
                //the data is correct
                if(Global.loggedP.getVoted()==true){
                 //already voted
@@ -476,7 +476,6 @@ public class Menu extends javax.swing.JFrame {
                         
                         //chaves
                         add.save(add.getPassword());
-                        add.setPrivKey(null);
                         Global.eleitoral.addListElector(add);
                         System.out.println(add.getName());
                      //   JOptionPane.showMessageDialog(null, "Eleitor: "+addVoteToBlockChain.getName()+" adiconado com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
@@ -490,7 +489,6 @@ public class Menu extends javax.swing.JFrame {
                         
                         //chaves
                         add.save(add.getPassword());
-                        add.setPrivKey(null);
                         Global.eleitoral.addListElector(add);
                         
                         System.out.println(add.getName());
