@@ -42,7 +42,7 @@ public class VoteMenu extends javax.swing.JDialog {
             JButton bt1;
             int y=0;
             initComponents();
-            for (Candidate c : Global.remote.getCandidatesList()){
+            for (Candidate c : Global.remote.getElection().getCandidate()){
                 //name label
                 l = new JLabel(c.getName());
                 l.setBounds(6,98+y,192,50);

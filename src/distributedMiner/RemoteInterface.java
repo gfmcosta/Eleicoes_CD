@@ -18,6 +18,7 @@ package distributedMiner;
 import distributedMiner.blockchain.Block;
 import distributedMiner.blockchain.BlockChain;
 import eleicoes.lib.Candidate;
+import eleicoes.lib.Election;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -100,12 +101,16 @@ public interface RemoteInterface extends Remote {
     //:::::                                                         :::::::::::::
     //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     public List getLastBlock(long timeStamp, int dept, int maxDep) throws RemoteException;
-
-
     
-    public void addCandidates(ArrayList<Candidate> candidates) throws RemoteException;
+    //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    //:::::                                                         :::::::::::::
+    //:::::               E L E C T I O N
+    //:::::                                                         :::::::::::::
+    //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    public void addElection(Election eleitoral) throws RemoteException;
 
-    public void synchonizeCandidates(ArrayList<Candidate> list) throws RemoteException;
+    public void synchonizeElection(Election eleitoral) throws RemoteException;
 
-    public ArrayList<Candidate> getCandidatesList() throws RemoteException;
+    public Election getElection() throws RemoteException;
+    
 }

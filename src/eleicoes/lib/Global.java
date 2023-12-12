@@ -12,7 +12,7 @@ import eleicoes.lib.Person;
  *
  * @author gonca
  */
-//This is a global class to acces all my variables pratically.
+//This is a global class to access all my variables pratically.
 public class Global {
     public static boolean isFirst=true;
     //default password to admin login
@@ -26,5 +26,7 @@ public class Global {
     public static Person loggedP = new Person();
     
     public static RemoteInterface remote;
+    
+    public static String ip = "//192.168.1.151:10010/RemoteMiner";
 
 }

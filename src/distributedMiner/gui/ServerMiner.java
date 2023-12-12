@@ -477,7 +477,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
             node = (RemoteInterface) RMI.getRemote(txtNodeAdress.getText());
             myRemote.addNode(node);
             myRemote.synchonizeTransactions(node.getTransactionsList());
-            myRemote.synchonizeCandidates(node.getCandidatesList());
+            myRemote.synchonizeElection(node.getElection());
         } catch (Exception ex) {
             onException("Add Node", ex);
         }
@@ -529,7 +529,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         if (lstCandidates.getSelectedIndex() >= 0) {
             try {
                 //candidato selecionado
-                Candidate c = myRemote.getCandidatesList().get(lstCandidates.getSelectedIndex());
+                Candidate c = myRemote.getElection().getCandidate().get(lstCandidates.getSelectedIndex());
                 
                 txtCandidates.setText(c.getInfo());
             } catch (RemoteException ex) {
@@ -809,12 +809,12 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
             try {
                 //atualizar os elementos da lista
                 DefaultListModel<String> model = new DefaultListModel<>();
-                for (int i = 0; i < myRemote.getCandidatesList().size(); i++) {
-                    model.addElement(myRemote.getCandidatesList().get(i).getAbv());
+                for (int i = 0; i < myRemote.getElection().getCandidate().size(); i++) {
+                    model.addElement(myRemote.getElection().getCandidate().get(i).getAbv());
                 }
                 lstCandidates.setModel(model);
                 //selecionar o último bloco
-                lstCandidates.setSelectedValue(myRemote.getCandidatesList().size() - 1, true);
+                lstCandidates.setSelectedValue(myRemote.getElection().getCandidate().size() - 1, true);
                 tpMain.setSelectedComponent(pnCandidates1);
 
             } catch (RemoteException ex) {
@@ -823,5 +823,26 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
 
         });
     }
+
+//    @Override
+//    public void onUpdateElection() {
+//        EventQueue.invokeLater(() -> {
+//            try {
+//                //atualizar os elementos da lista
+//                DefaultListModel<String> model = new DefaultListModel<>();
+//                for (int i = 0; i < myRemote.getCandidatesList().size(); i++) {
+//                    model.addElement(myRemote.getCandidatesList().get(i).getAbv());
+//                }
+//                lstCandidates.setModel(model);
+//                //selecionar o último bloco
+//                lstCandidates.setSelectedValue(myRemote.getCandidatesList().size() - 1, true);
+//                tpMain.setSelectedComponent(pnCandidates1);
+//
+//            } catch (RemoteException ex) {
+//                onException("onReceiveCandidates", ex);
+//            }
+//
+//        });
+//    }
 
 }

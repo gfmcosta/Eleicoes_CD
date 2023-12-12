@@ -252,7 +252,6 @@ public class CandidateAdd extends javax.swing.JDialog {
 
         x = new Candidate("Antonio Costa", "AC", "/resources/PS.png");
         Global.eleitoral.addListCandidate(x);
-     
         JOptionPane.showMessageDialog(null, "Candidato adicionado com sucesso.", "Eleitor", JOptionPane.INFORMATION_MESSAGE);
 
         }catch(Exception e ){

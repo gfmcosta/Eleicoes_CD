@@ -34,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import distributedMiner.utils.Serializer;
 import eleicoes.lib.Candidate;
+import eleicoes.lib.Election;
 import java.util.stream.Collectors;
 
 /**
@@ -45,14 +46,14 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
     MiningListener listener;
     MinerP2P myMiner;
     Transactions transactions;
-    ArrayList<Candidate> candidates;
-    
+    Election eleitoral;
     public Block miningBlock; // block in mining process
 
     public BlockChain blockchain;
 
     private String address; // nome do servidor
     private List<RemoteInterface> network; // network of miners
+
     /**
      * creates a object listening the port
      *
@@ -71,12 +72,12 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
             network = new CopyOnWriteArrayList<>();
             //inicializar novas transações
             transactions = new Transactions();
-            this.miningBlock = new Block("dummy", "dummy", 1,null);
+            this.miningBlock = new Block("dummy", "dummy", 1, null);
             //inicializar blockchain
             blockchain = new BlockChain();
-            
-            //inicializar candidates
-            candidates = new ArrayList<>();
+
+            //inicializar eleicao
+            eleitoral = new Election();
 
             listener.onStartServer(distributedMiner.utils.RMI.getRemoteName(port, RemoteInterface.OBJECT_NAME));
         } catch (Exception e) {
@@ -295,7 +296,7 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
 
         //dados do bloco são as lista de transaçoes 
         String data = Serializer.objectToBase64(transactions.getList());
-        
+
         //Criar merkel Tree
         MerkleTreeString mk = new MerkleTreeString(transactions.getList());
         System.out.println(mk.toString());
@@ -369,7 +370,7 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
 
     @Override
     public List getLastBlock(long timeStamp, int dept, int maxDep) throws RemoteException {
-       //codigo com acesso exclusivo  para a thread
+        //codigo com acesso exclusivo  para a thread
         synchronized (this) {
             //verificar se ja respondi
             if (flagLastBlock.get(timeStamp) != null) {
@@ -397,7 +398,7 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
                 return null;
             }
         }).filter(resp -> resp != null).collect(Collectors.toList());
-        
+
         // Adicionar todas as respostas à lista principal
         for (List resp : responses) {
             myList.addAll(resp);
@@ -405,47 +406,41 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
         return myList;
     }
 
-    
-    
     @Override
-    public void addCandidates(ArrayList<Candidate> candidates) throws RemoteException {
+    public void addElection(Election eleitoral) throws RemoteException {
         //se já tiver a transação não faz nada
-        
-            
-            if (this.candidates.size() == candidates.size()) {
-                return;
-            }
 
-            this.candidates.addAll(candidates);
-            listener.onUpdateCandidate();
-            listener.onMessage("addTransaction", getClientName());
-        
-                //sincronizar a transacao
-                for (RemoteInterface node : network) {
-                    node.synchonizeCandidates(candidates);
-                }
-        
+        if (this.eleitoral == eleitoral) {
+            return;
+        }
+
+        this.eleitoral = eleitoral;
+        //listener.onUpdateElection();
+        listener.onMessage("addEleitoral", getClientName());
+
+        //sincronizar a transacao
+        for (RemoteInterface node : network) {
+            node.synchonizeElection(eleitoral);
+        }
     }
 
     @Override
-    public ArrayList<Candidate> getCandidatesList() throws RemoteException {
-        return candidates;
-    }
-
-    @Override
-    public void synchonizeCandidates(ArrayList<Candidate> list) throws RemoteException {
-        if (this.candidates.size() == list.size()) {
-                return;
-            }
+    public void synchonizeElection(Election eleitoral) throws RemoteException {
+        if (this.eleitoral == eleitoral) {
+            return;
+        }
         
-        addCandidates(list);
-        
+        addElection(eleitoral);
         //mandar sincronizar a rede
         for (RemoteInterface node : network) {
-            node.synchonizeCandidates(candidates);
+            node.synchonizeElection(eleitoral);
         }
-        listener.onMessage("synchonizeCandidates", getClientName());
-
+        listener.onMessage("synchonizeElection", getClientName());
     }
-    
+
+    @Override
+    public Election getElection() throws RemoteException {
+        return eleitoral;
+    }
+
 }

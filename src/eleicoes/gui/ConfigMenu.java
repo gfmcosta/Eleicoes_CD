@@ -364,18 +364,16 @@ public class ConfigMenu extends javax.swing.JDialog {
         // Adiciona um dia para obter a data de amanhã
         cal.add(Calendar.DAY_OF_MONTH, 1);
         Date amanha = cal.getTime();
-        
         Global.eleitoral.setName("Eleicao de Testes");
         Global.eleitoral.setDataI(hoje);
         Global.eleitoral.setDataF(amanha);
-        Global.eleitoral.setImage("info.png");
-        
+        Global.eleitoral.setImage("info.png");        
         try {
             //Alterar para o ip da máquina servidor
-            String ip="//192.168.1.111:10010/RemoteMiner";
-            Global.remote = (RemoteInterface) RMI.getRemote(ip);
-            System.out.println("Connected to "+ ip);
-            Global.remote.addCandidates(Global.eleitoral.getCandidate());
+            
+            Global.remote = (RemoteInterface) RMI.getRemote(Global.ip);
+            System.out.println("Connected to "+ Global.ip);
+            Global.remote.addElection(Global.eleitoral);
             JOptionPane.showMessageDialog(null, "Eleição criada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } catch (Exception e) {
