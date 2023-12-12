@@ -475,7 +475,7 @@ public class Menu extends javax.swing.JFrame {
                     }else{
                         
                         //chaves
-                        add.save(add.getPassword());
+                        // add.save(add.getPassword());
                         Global.eleitoral.addListElector(add);
                         System.out.println(add.getName());
                      //   JOptionPane.showMessageDialog(null, "Eleitor: "+addVoteToBlockChain.getName()+" adiconado com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
@@ -488,7 +488,7 @@ public class Menu extends javax.swing.JFrame {
                     }else{
                         
                         //chaves
-                        add.save(add.getPassword());
+                       // add.save(add.getPassword());
                         Global.eleitoral.addListElector(add);
                         
                         System.out.println(add.getName());

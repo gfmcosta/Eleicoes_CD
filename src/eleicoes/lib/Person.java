@@ -42,10 +42,6 @@ public class Person implements Serializable{
     private String sexo;
     private boolean voted;
     
-    private PublicKey pubKey;
-    private PrivateKey privKey;    
-    private List<Vote> votos;
-    
     /** 
     * Class constructor.
     */
@@ -59,10 +55,6 @@ public class Person implements Serializable{
             dataNasc=new Date();
             image="";
             sexo="";
-            KeyPair kp = SecurityUtils.generateRSAKeyPair();
-            privKey = kp.getPrivate();
-            pubKey = kp.getPublic();
-            votos = new ArrayList<>();
         } catch (Exception ex) {
             Logger.getLogger(Person.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -86,18 +78,12 @@ public class Person implements Serializable{
         dataNasc=d;
         image= i;
         sexo=s;
-        KeyPair kp = SecurityUtils.generateRSAKeyPair();
-        privKey = kp.getPrivate();
-        pubKey = kp.getPublic();
-        votos = new ArrayList<>();
+    
     }
     
-    public Person(String cc, String p, PublicKey pubKey, PrivateKey privKey,List<Vote> votos) {
+    public Person(String cc, String p) {
         this.cc = cc;
-        this.password=p;
-        this.pubKey = pubKey;
-        this.privKey = privKey;       
-        this.votos = votos;
+        this.password=p;    
     }
     
     /** 
@@ -264,109 +250,10 @@ public class Person implements Serializable{
             }
     }
     
-    
-    public void addVote(Vote t) throws Exception {
-        Files.write(Path.of(getUserFileName(t.getTo())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
-        Files.write(Path.of(getUserFileName(t.getFrom())), (t.toText() + "\n").getBytes(), StandardOpenOption.APPEND);
-        votos.add(t);
-    }
-
-    @Override
-    public String toString() {
-        String pub = Base64.getEncoder().encodeToString(pubKey.getEncoded());
-        String priv = privKey != null ? Base64.getEncoder().encodeToString(privKey.getEncoded()) : "unknow";        
-        String txt = "CC\t: " + cc
-                + "\nPub\t: " + pub
-                + "\nPrv\t: " + priv
-                + "\nVotos \n";
-        for (Vote v : votos) {
-            txt += v.toString() + "\n";
-        }
-        return txt;
-
-    }
-
-    public static String getUserFileName(String cc) throws Exception {
-        return cc + ".user";
-    }
-
-    public void save(String password) throws Exception {
-        //String fileName = getUserFileName(cc);
-        String fileName = "keys" + File.separator + getUserFileName(cc);
-
-        PrintStream out = new PrintStream(new FileOutputStream(fileName));
-        out.println(cc);
-        out.println(Base64.getEncoder().encodeToString(pubKey.getEncoded()));
-        out.println(Base64.getEncoder().encodeToString(SecurityUtils.encrypt(privKey.getEncoded(), password)));
-        for (Vote v : votos) {
-            out.println(v.toText());
-        }
-        out.close();
-    }
-
-    public static Person loadUser(String... params) throws Exception {
-        params[0] = getUserFileName(params[0]);
-        return load(params);
-    }
-
-    /**
-     * loads an user from filename
-     *
-     * @param params array of parameters
-     * <br>params[0] - filename (mandatory)
-     * <br>params[1] - password (optional)
-     *
-     * @return User
-     * @throws Exception
-     */
-    private static Person load(String... params) throws Exception {
-        String filePath = "keys" + File.separator + params[0];
-        Scanner file = new Scanner(new FileInputStream(filePath));
-        String cc = file.nextLine();
-        String pub = file.nextLine();
-        String priv = file.nextLine();
-        String pwd = params[1];
-
-        PublicKey pubKey = SecurityUtils.getPublicKey(Base64.getDecoder().decode(pub));
-        PrivateKey privKey = null;        
-        List<Vote> votes = new ArrayList<>();
-        //try to load keys 
-        try {
-            privKey = SecurityUtils.getPrivateKey(SecurityUtils.decrypt(Base64.getDecoder().decode(priv), params[1]));            
-            while (file.hasNext()) {
-                votes.add(Vote.fromText(file.nextLine()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return new Person(cc,pwd,
-                SecurityUtils.getPublicKey(Base64.getDecoder().decode(pub)),
-                privKey, votes);
-    }
-
-
-    public PublicKey getPubKey() {
-        return pubKey;
-    }
-
-    public PrivateKey getPrivKey() {
-        return privKey;
-    }
-    
-    public void setPrivKey(PrivateKey pk) {
-        this.privKey = pk; 
-    }
-
-    public List<Vote> getTransactions() {
-        return votos;
-    }
-    
     public String getInfo() {
         return "CC:    " + cc
                 + "\nNome    :" + name
                 + "\nDataNasc    :" + dataNasc
-                + "\nSexo    :" + sexo
-                + "\nPubKey    :" + Base64.getEncoder().encodeToString(pubKey.getEncoded());
+                + "\nSexo    :" + sexo;
     }
 }

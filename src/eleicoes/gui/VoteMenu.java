@@ -8,6 +8,7 @@ import client.Vote;
 import distributedMiner.utils.Converter;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
+import eleicoes.lib.User;
 import eleicoes.utils.SecurityUtils;
 import java.awt.Image;
 import java.awt.TextArea;
@@ -152,10 +153,11 @@ public class VoteMenu extends javax.swing.JDialog {
                     //Signature: Assinaturado objeto Voto com a chave privada da pessoa (O voto tem apenas from e to nesta instância com assinatura a null)
                     Vote v =null;
                     try {
-                        byte[] eleitor = SecurityUtils.encrypt(Converter.objectToByteArray(Global.loggedP.getCC()), Global.loggedP.getPubKey());
+                        User loadedPerson = User.loadUser(Global.loggedP.getCC(), Global.loggedP.getPassword());
+                        byte[] eleitor = SecurityUtils.encrypt(Converter.objectToByteArray(Global.loggedP.getCC()), loadedPerson.getPubKey());
                         String eleitorString = Base64.getEncoder().encodeToString(eleitor);
                         v = new Vote(eleitorString, vote);
-                        byte[] assinatura = SecurityUtils.sign(Converter.objectToByteArray(v), Global.loggedP.getPrivKey());
+                        byte[] assinatura = SecurityUtils.sign(Converter.objectToByteArray(v), loadedPerson.getPrivKey());
                         String assinaturaString = Base64.getEncoder().encodeToString(assinatura);
                         v= new Vote(eleitorString, vote,assinaturaString);
                     } catch (Exception ex) {

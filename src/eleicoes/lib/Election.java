@@ -236,8 +236,8 @@ public class Election implements Serializable {
         
         // Assumindo que assinaturaString é a String da assinatura recebida
         byte[] assinatura = Base64.getDecoder().decode(t.getSign());
-
-        return verifySign(objectToByteArray(v), assinatura, Global.loggedP.getPubKey());
+        User loadedPerson = User.loadUser(Global.loggedP.getCC(), Global.loggedP.getPassword());
+        return verifySign(objectToByteArray(v), assinatura, loadedPerson.getPubKey());
     }
 }
 

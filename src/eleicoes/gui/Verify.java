@@ -10,6 +10,7 @@ import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;
 import eleicoes.lib.Person;
+import eleicoes.lib.User;
 import java.awt.Image;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -47,13 +48,9 @@ public class Verify extends javax.swing.JFrame {
                 //Alterar para o ip da máquina servidor
                 Global.remote = (RemoteInterface) RMI.getRemote(Global.ip);
                 System.out.println("Connected to "+ Global.ip);
-                deleteFiles();
                 Global.isFirst=false;
             }
             
-            ImageIcon i = new javax.swing.ImageIcon(getClass().getResource("/resources/upload.png"));
-            Image img = i.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-            jLabel8.setIcon(new ImageIcon(img));
         } catch (NotBoundException ex) {
             Logger.getLogger(Verify.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -103,7 +100,6 @@ public class Verify extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Eleições by Costa & Diogo");
@@ -114,7 +110,6 @@ public class Verify extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Eleições");
 
-        jTextField1.setEditable(false);
         jTextField1.setToolTipText("Número CC: XXXXXXXX");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -142,16 +137,6 @@ public class Verify extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setMaximumSize(new java.awt.Dimension(25, 25));
-        jLabel8.setMinimumSize(new java.awt.Dimension(25, 25));
-        jLabel8.setOpaque(true);
-        jLabel8.setPreferredSize(new java.awt.Dimension(25, 25));
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,16 +152,14 @@ public class Verify extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))))
-                        .addGap(37, 37, 37))
+                        .addGap(147, 147, 147))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(110, 110, 110))
+                        .addGap(141, 141, 141))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,10 +169,8 @@ public class Verify extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
@@ -210,11 +191,7 @@ public class Verify extends javax.swing.JFrame {
         // TODO addVoteToBlockChain your handling code here:
         try{
         // cc number
-        String fich = jTextField1.getText();
-        // Encontrar a posição de ".pub"
-        int indexOfPub = fich.indexOf(".user");
-        // Verificar se ".pub" foi encontrado e extrair o texto antes disso
-        String ccn = (indexOfPub != -1) ? fich.substring(0, indexOfPub) : fich;
+        String ccn = jTextField1.getText();
         //bolean to control 'for' results
         boolean isValid=false;
         if(jTextField1.getText().equals("")){
@@ -225,21 +202,19 @@ public class Verify extends javax.swing.JFrame {
             //textField1 isnt null
         for(Person p : Global.remote.getElection().getElector()){
             if(p.getCC().equals(ccn) && p.getVoted()==false){
-                
-               //can vote
+                if(p.getPassword().equals(new String(jPasswordField1.getPassword()))){
+                //can vote
                 isValid=true;
                 //copy person with the same CC to Global variable loggedPerson
                 Global.loggedP=p;
                 //open nem form
                 String pwd = new String(jPasswordField1.getPassword());
-                Person loadedPerson = Person.loadUser(ccn, pwd);
-                if(loadedPerson.getPrivKey()!=null){
-                    new Menu().setVisible(true);
-                    dispose();
+                User loadedPerson = new User(p.getCC());
+                loadedPerson.save(pwd);
+                break;
                 }else{
                     JOptionPane.showMessageDialog(null, "A password não está coreta", "Atenção", JOptionPane.WARNING_MESSAGE);
                 }
-                break;
             }else if(p.getCC().equals(ccn) && p.getVoted()==true){
                 //cant vote but can see the results
                 isValid=true;
@@ -254,6 +229,10 @@ public class Verify extends javax.swing.JFrame {
         if (!isValid){
            //cc never exist
            JOptionPane.showMessageDialog(null, "O seu número de CC não se encontra na nossa lista", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            //open new form
+            new Menu().setVisible(true);
+            dispose();
         }
 }
         }catch(Exception ex){
@@ -271,20 +250,6 @@ public class Verify extends javax.swing.JFrame {
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO addVoteToBlockChain your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO addVoteToBlockChain your handling code here:
-        Path defaultDirectoryPath = Paths.get(System.getProperty("user.dir"), "keys");
-        File defaultDirectory = defaultDirectoryPath.toFile();
-
-        JFileChooser chooser = new JFileChooser(defaultDirectory);
-        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            // Crie um arquivo com o arquivo selecionado
-            File f = chooser.getSelectedFile();
-            // Salve o nome do arquivo selecionado no campo de texto
-            jTextField1.setText(f.getName());
-        }
-    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -327,7 +292,6 @@ public class Verify extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
