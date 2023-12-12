@@ -8,6 +8,7 @@ package eleicoes.lib;
 import client.Vote;
 import static distributedMiner.utils.Converter.objectToByteArray;
 import static eleicoes.utils.SecurityUtils.verifySign;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author Costa
  */
-public class Election {
+public class Election implements Serializable {
     String name;
     Date dataI;
     Date dataF;

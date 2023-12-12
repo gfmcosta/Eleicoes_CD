@@ -410,12 +410,12 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
     public void addElection(Election eleitoral) throws RemoteException {
         //se já tiver a transação não faz nada
 
-        if (this.eleitoral == eleitoral) {
+        if (this.eleitoral.getElector().size() == eleitoral.getElector().size() && this.eleitoral.getCandidate().size() == eleitoral.getCandidate().size()) {
             return;
         }
 
         this.eleitoral = eleitoral;
-        //listener.onUpdateElection();
+        listener.onUpdateElection();
         listener.onMessage("addEleitoral", getClientName());
 
         //sincronizar a transacao
@@ -426,7 +426,7 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
 
     @Override
     public void synchonizeElection(Election eleitoral) throws RemoteException {
-        if (this.eleitoral == eleitoral) {
+        if (this.eleitoral.getElector().size() == eleitoral.getElector().size() && this.eleitoral.getCandidate().size() == eleitoral.getCandidate().size()) {
             return;
         }
         

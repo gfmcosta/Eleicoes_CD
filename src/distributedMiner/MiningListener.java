@@ -47,7 +47,5 @@ public interface MiningListener {
     
     public void onConsensus(String title, String desc);
     
-    public void onUpdateCandidate();
-    
-    //public void onUpdateElection();
+    public void onUpdateElection();
 }

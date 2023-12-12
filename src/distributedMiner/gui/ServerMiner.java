@@ -139,6 +139,16 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         txtCandidates = new javax.swing.JTextArea();
+        pnElectors = new javax.swing.JPanel();
+        pnElectorsTop3 = new javax.swing.JPanel();
+        pnLabelLeft3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        lstElectors = new javax.swing.JList<>();
+        pnLabelCenter3 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        txtElectors = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtLog = new javax.swing.JTextPane();
 
@@ -393,7 +403,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
 
         pnCandidates1.setLayout(new java.awt.BorderLayout());
 
-        pnCandidatesTop2.setLayout(new java.awt.GridLayout());
+        pnCandidatesTop2.setLayout(new java.awt.GridLayout(1, 0));
 
         pnLabelLeft2.setLayout(new java.awt.BorderLayout());
 
@@ -443,6 +453,59 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         pnCandidates1.add(pnCandidatesTop2, java.awt.BorderLayout.CENTER);
 
         tpMain.addTab("Candidates", pnCandidates1);
+
+        pnElectors.setLayout(new java.awt.BorderLayout());
+
+        pnElectorsTop3.setLayout(new java.awt.GridLayout());
+
+        pnLabelLeft3.setLayout(new java.awt.BorderLayout());
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Candidates");
+        jLabel11.setPreferredSize(new java.awt.Dimension(200, 16));
+        pnLabelLeft3.add(jLabel11, java.awt.BorderLayout.NORTH);
+
+        jScrollPane11.setMaximumSize(new java.awt.Dimension(32767, 200));
+
+        lstElectors.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        lstElectors.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstElectorsValueChanged(evt);
+            }
+        });
+        jScrollPane11.setViewportView(lstElectors);
+
+        pnLabelLeft3.add(jScrollPane11, java.awt.BorderLayout.CENTER);
+
+        pnElectorsTop3.add(pnLabelLeft3);
+
+        pnLabelCenter3.setLayout(new java.awt.BorderLayout());
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Details");
+        pnLabelCenter3.add(jLabel12, java.awt.BorderLayout.NORTH);
+
+        jScrollPane12.setMaximumSize(new java.awt.Dimension(300, 900000));
+        jScrollPane12.setOpaque(false);
+
+        txtElectors.setColumns(20);
+        txtElectors.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        txtElectors.setRows(5);
+        txtElectors.setMaximumSize(new java.awt.Dimension(300, 900000));
+        txtElectors.setOpaque(false);
+        jScrollPane12.setViewportView(txtElectors);
+
+        pnLabelCenter3.add(jScrollPane12, java.awt.BorderLayout.CENTER);
+
+        pnElectorsTop3.add(pnLabelCenter3);
+
+        pnElectors.add(pnElectorsTop3, java.awt.BorderLayout.CENTER);
+
+        tpMain.addTab("Electors", pnElectors);
 
         getContentPane().add(tpMain, java.awt.BorderLayout.CENTER);
 
@@ -538,6 +601,10 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         }
     }//GEN-LAST:event_lstCandidatesValueChanged
 
+    private void lstElectorsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstElectorsValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lstElectorsValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -580,6 +647,8 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
     private javax.swing.JButton btStartServer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -597,6 +666,8 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
@@ -606,18 +677,23 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JList<String> lstBlockchain;
     private javax.swing.JList<String> lstCandidates;
+    private javax.swing.JList<String> lstElectors;
     private javax.swing.JList<String> lstTransactions;
     private javax.swing.JPanel pnBlochchain;
     private javax.swing.JPanel pnBlockchianTop;
     private javax.swing.JPanel pnBlockchianTop1;
     private javax.swing.JPanel pnCandidates1;
     private javax.swing.JPanel pnCandidatesTop2;
+    private javax.swing.JPanel pnElectors;
+    private javax.swing.JPanel pnElectorsTop3;
     private javax.swing.JPanel pnLabelCenter;
     private javax.swing.JPanel pnLabelCenter1;
     private javax.swing.JPanel pnLabelCenter2;
+    private javax.swing.JPanel pnLabelCenter3;
     private javax.swing.JPanel pnLabelLeft;
     private javax.swing.JPanel pnLabelLeft1;
     private javax.swing.JPanel pnLabelLeft2;
+    private javax.swing.JPanel pnLabelLeft3;
     private javax.swing.JPanel pnMining;
     private javax.swing.JPanel pnNtework;
     private javax.swing.JPanel pnServer;
@@ -630,6 +706,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
     private javax.swing.JTextArea txtBlockchain;
     private javax.swing.JTextArea txtCandidates;
     private javax.swing.JTextArea txtData;
+    private javax.swing.JTextArea txtElectors;
     private javax.swing.JPanel txtField;
     private javax.swing.JPanel txtField1;
     private javax.swing.JPanel txtField2;
@@ -670,7 +747,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
             //atualizar as transacoes e a blockchain
             onUpdateTransactions(null);
             onUpdateBlockchain();
-            onUpdateCandidate();
+            onUpdateElection();
         });
     }
 
@@ -804,7 +881,7 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
     
     
     @Override
-    public void onUpdateCandidate() {
+    public void onUpdateElection() {
         EventQueue.invokeLater(() -> {
             try {
                 //atualizar os elementos da lista
@@ -823,26 +900,4 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
 
         });
     }
-
-//    @Override
-//    public void onUpdateElection() {
-//        EventQueue.invokeLater(() -> {
-//            try {
-//                //atualizar os elementos da lista
-//                DefaultListModel<String> model = new DefaultListModel<>();
-//                for (int i = 0; i < myRemote.getCandidatesList().size(); i++) {
-//                    model.addElement(myRemote.getCandidatesList().get(i).getAbv());
-//                }
-//                lstCandidates.setModel(model);
-//                //selecionar o último bloco
-//                lstCandidates.setSelectedValue(myRemote.getCandidatesList().size() - 1, true);
-//                tpMain.setSelectedComponent(pnCandidates1);
-//
-//            } catch (RemoteException ex) {
-//                onException("onReceiveCandidates", ex);
-//            }
-//
-//        });
-//    }
-
 }

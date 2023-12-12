@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -32,7 +33,7 @@ import java.util.logging.Logger;
  *
  * @author Costa
  */
-public class Person {
+public class Person implements Serializable{
     private String name;
     private String cc;
     private String password;
