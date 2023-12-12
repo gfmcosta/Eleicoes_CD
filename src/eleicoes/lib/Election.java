@@ -5,7 +5,6 @@
 package eleicoes.lib;
 
 
-import distributedMiner.blockchain.Candidate;
 import client.Vote;
 import static distributedMiner.utils.Converter.objectToByteArray;
 import static eleicoes.utils.SecurityUtils.verifySign;

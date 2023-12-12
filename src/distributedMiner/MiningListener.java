@@ -15,7 +15,7 @@
 //////////////////////////////////////////////////////////////////////////////
 package distributedMiner;
 
-import distributedMiner.blockchain.Candidate;
+import eleicoes.lib.Candidate;
 
 /**
  * Created on 29/11/2023, 07:47:26

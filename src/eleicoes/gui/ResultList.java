@@ -5,7 +5,7 @@
 package eleicoes.gui;
 
 import eleicoes.lib.Global;
-import distributedMiner.blockchain.Candidate;
+import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;
 import java.awt.Color;
 import java.awt.Cursor;

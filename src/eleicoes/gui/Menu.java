@@ -10,7 +10,7 @@ import distributedMiner.blockchain.Block;
 import distributedMiner.blockchain.BlockChain;
 import distributedMiner.utils.Serializer;
 import eleicoes.lib.Global;
-import distributedMiner.blockchain.Candidate;
+import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;
 import eleicoes.lib.Person;
 import java.awt.Color;

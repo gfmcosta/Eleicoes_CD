@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import distributedMiner.utils.Serializer;
-import distributedMiner.blockchain.Candidate;
+import eleicoes.lib.Candidate;
 import java.util.stream.Collectors;
 
 /**

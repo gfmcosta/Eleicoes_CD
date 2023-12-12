@@ -17,7 +17,7 @@ package distributedMiner;
 
 import distributedMiner.blockchain.Block;
 import distributedMiner.blockchain.BlockChain;
-import distributedMiner.blockchain.Candidate;
+import eleicoes.lib.Candidate;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
