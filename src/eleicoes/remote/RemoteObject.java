@@ -20,6 +20,7 @@ import eleicoes.blockchain.BlockChain;
 import eleicoes.blockchain.BlockchainException;
 import eleicoes.blockchain.MerkleTreeString;
 import eleicoes.blockchain.consensus.LastBlock;
+import eleicoes.gui.ServerMiner;
 import eleicoes.utils.MinerP2P;
 import eleicoes.vote.Votes;
 import java.net.InetAddress;
@@ -35,6 +36,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import eleicoes.utils.Serializer;
 import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -80,9 +83,15 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
             eleitoral = new Election();
 
             listener.onStartServer(eleicoes.utils.RMI.getRemoteName(port, RemoteInterface.OBJECT_NAME));
-        } catch (Exception e) {
+            
+            //Anunciar a rede que estou ativo
+            AutomaticP2P.sendAddress(address, 5_000); //5 segundos
+            listener.onMessage("UDP SEND", address);
+            AutomaticP2P.listenToNodes(this);
+            listener.onMessage("UDP LISTENER", address);
+        } catch (Exception ex) {
             address = "unknow" + ":" + port;
-
+            Logger.getLogger(ServerMiner.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
