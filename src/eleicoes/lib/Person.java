@@ -4,7 +4,7 @@
  */
 package eleicoes.lib;
 
-import client.Vote;
+import eleicoes.vote.Vote;
 import eleicoes.utils.SecurityUtils;
 
 import java.io.File;

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
-import client.Vote;
+import eleicoes.vote.Vote;
 import eleicoes.utils.SecurityUtils;
 import java.io.File;
 

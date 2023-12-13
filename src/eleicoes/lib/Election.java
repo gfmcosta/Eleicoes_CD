@@ -5,8 +5,8 @@
 package eleicoes.lib;
 
 
-import client.Vote;
-import static distributedMiner.utils.Converter.objectToByteArray;
+import eleicoes.vote.Vote;
+import static eleicoes.utils.Serializer.objectToByteArray;
 import static eleicoes.utils.SecurityUtils.verifySign;
 import java.io.Serializable;
 import java.util.ArrayList;

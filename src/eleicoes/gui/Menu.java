@@ -4,11 +4,11 @@
  */
 package eleicoes.gui;
 
-import client.Vote;
-import distributedMiner.RemoteObject;
-import distributedMiner.blockchain.Block;
-import distributedMiner.blockchain.BlockChain;
-import distributedMiner.utils.Serializer;
+import eleicoes.vote.Vote;
+import eleicoes.remote.RemoteObject;
+import eleicoes.blockchain.Block;
+import eleicoes.blockchain.BlockChain;
+import eleicoes.utils.Serializer;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;

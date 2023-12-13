@@ -4,7 +4,7 @@
  */
 package eleicoes.lib;
 
-import distributedMiner.RemoteInterface;
+import eleicoes.remote.RemoteInterface;
 import eleicoes.lib.Election;
 import eleicoes.lib.Person;
 
@@ -27,6 +27,6 @@ public class Global {
     
     public static RemoteInterface remote;
     
-    public static String ip = "//192.168.213.11:10010/RemoteMiner";
+    public static String ip = "//10.10.209.229:10010/RemoteMiner";
 
 }

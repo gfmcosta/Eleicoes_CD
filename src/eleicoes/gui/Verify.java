@@ -4,8 +4,8 @@
  */
 package eleicoes.gui;
 
-import distributedMiner.RemoteInterface;
-import distributedMiner.utils.RMI;
+import eleicoes.remote.RemoteInterface;
+import eleicoes.utils.RMI;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
 import eleicoes.lib.Election;

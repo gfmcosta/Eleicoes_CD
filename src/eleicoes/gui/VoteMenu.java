@@ -4,10 +4,10 @@
  */
 package eleicoes.gui;
 
-import client.Vote;
-import distributedMiner.utils.Converter;
+import eleicoes.vote.Vote;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
+import eleicoes.utils.Serializer;
 import eleicoes.lib.Election;
 import eleicoes.lib.Person;
 import eleicoes.lib.User;
@@ -154,10 +154,10 @@ public class VoteMenu extends javax.swing.JDialog {
                     Vote v =null;
                     try {
                         User loadedPerson = User.loadUser(Global.loggedP.getCC(), Global.loggedP.getPassword());
-                        byte[] eleitor = SecurityUtils.encrypt(Converter.objectToByteArray(Global.loggedP.getCC()), loadedPerson.getPubKey());
+                        byte[] eleitor = SecurityUtils.encrypt(Serializer.objectToByteArray(Global.loggedP.getCC()), loadedPerson.getPubKey());
                         String eleitorString = Base64.getEncoder().encodeToString(eleitor);
                         v = new Vote(eleitorString, vote);
-                        byte[] assinatura = SecurityUtils.sign(Converter.objectToByteArray(v), loadedPerson.getPrivKey());
+                        byte[] assinatura = SecurityUtils.sign(Serializer.objectToByteArray(v), loadedPerson.getPrivKey());
                         String assinaturaString = Base64.getEncoder().encodeToString(assinatura);
                         v= new Vote(eleitorString, vote,assinaturaString);
                     } catch (Exception ex) {
