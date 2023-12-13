@@ -27,6 +27,6 @@ public class Global {
     
     public static RemoteInterface remote;
     
-    public static String ip = "//10.10.192.71:10010/RemoteMiner";
+    public static String ip = "//192.168.213.11:10010/RemoteMiner";
 
 }

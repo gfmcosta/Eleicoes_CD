@@ -79,30 +79,34 @@ public class Menu extends javax.swing.JFrame {
             jButton4.setVisible(true);
             jButton2.setEnabled(false);
         }else{
-            //disable admin buttons
-            jButton3.setVisible(false);
-            jButton2.setEnabled(true);
-            jButton4.setVisible(false);
-            jButton6.setVisible(false);
-            i = new javax.swing.ImageIcon(getClass().getResource(Global.loggedP.getImage()));
-            img = i.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            jLabel2.setIcon(new ImageIcon(img));
-            //write name and cc in menu labels
-        jLabel6.setText(Global.loggedP.getName());
-        jLabel7.setText(Global.loggedP.getCC());
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        jLabel9.setText(formato.format(Global.loggedP.getDataNasc()));
-        
-        //write status of isVoted jLabel5
-        if(Global.loggedP.getVoted()==false){
-            jLabel5.setForeground(new Color(51,204,0));
-            jLabel5.setText("Apto a Votar");
-            jButton2.setEnabled(true);
-        }else{
-            jLabel5.setForeground(Color.red);
-            jLabel5.setText("Já Votou");
-            jButton2.setEnabled(false);
-        }
+            try {
+                //disable admin buttons
+                jButton3.setVisible(false);
+                jButton2.setEnabled(true);
+                jButton4.setVisible(false);
+                jButton6.setVisible(false);
+                i = new javax.swing.ImageIcon(getClass().getResource(Global.loggedP.getImage()));
+                img = i.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                jLabel2.setIcon(new ImageIcon(img));
+                //write name and cc in menu labels
+                jLabel6.setText(Global.loggedP.getName());
+                jLabel7.setText(Global.loggedP.getCC());
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                jLabel9.setText(formato.format(Global.loggedP.getDataNasc()));
+                
+                //write status of isVoted jLabel5
+                
+                if(Global.remote.getElection().getElectorByCC(Global.loggedP.getCC()).getVoted()==false){
+                    jLabel5.setForeground(new Color(51,204,0));
+                    jLabel5.setText("Apto a Votar");
+                    jButton2.setEnabled(true);
+                }else{
+                    jLabel5.setForeground(Color.red);
+                    jLabel5.setText("Já Votou");
+                    jButton2.setEnabled(false);
+                }   } catch (RemoteException ex) {
+                java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
         }
         //Verify finished
     }

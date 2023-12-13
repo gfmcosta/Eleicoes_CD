@@ -50,6 +50,15 @@ public class Election implements Serializable {
         return elector;
     }
 
+    
+    public Person getElectorByCC(String cc) {
+        for (Person p: elector){
+            if (p.getCC() == null ? cc == null : p.getCC().equals(cc)){
+                return p;
+            }
+        }
+        return null;
+    }
     /** 
     * Set an array of electors
     * @param elector an array of persons

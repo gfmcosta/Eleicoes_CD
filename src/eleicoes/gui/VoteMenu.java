@@ -8,6 +8,7 @@ import client.Vote;
 import distributedMiner.utils.Converter;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
+import eleicoes.lib.Person;
 import eleicoes.lib.User;
 import eleicoes.utils.SecurityUtils;
 import java.awt.Image;
@@ -142,11 +143,10 @@ public class VoteMenu extends javax.swing.JDialog {
                     String vote=buttonGroup1.getSelection().getActionCommand();
                     try {
                         Global.remote.getElection().addListVotes(vote);
+                        Global.remote.getElection().getElectorByCC(Global.loggedP.getCC()).setVoted(true);
                     } catch (RemoteException ex) {
                         Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    Global.loggedP.setVoted(true);
-                    
+                    }                    
                     //Cria um voto
                     //From: CC da pessoa encriptado com a chave publica
                     //To: String abreviatura do candidato
