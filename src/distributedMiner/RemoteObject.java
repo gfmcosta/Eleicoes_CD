@@ -410,7 +410,7 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
     public void addElection(Election eleitoral) throws RemoteException {
         //se já tiver a transação não faz nada
 
-        if (this.eleitoral.getElector().size() == eleitoral.getElector().size() && this.eleitoral.getCandidate().size() == eleitoral.getCandidate().size()) {
+        if (this.eleitoral.getElector().size() == eleitoral.getElector().size() && this.eleitoral.getCandidate().size() == eleitoral.getCandidate().size() && this.eleitoral.getElector().equals(eleitoral.getElector())) {
             return;
         }
 
@@ -441,6 +441,12 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
     @Override
     public Election getElection() throws RemoteException {
         return eleitoral;
+    }
+
+    @Override
+    public void electorVote(Election eleitoral, String cc) throws Exception {
+        eleitoral.getElectorByCC(cc).setVoted(true);
+        addElection(eleitoral);
     }
 
 }

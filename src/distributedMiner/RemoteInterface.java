@@ -112,5 +112,5 @@ public interface RemoteInterface extends Remote {
     public void synchonizeElection(Election eleitoral) throws RemoteException;
 
     public Election getElection() throws RemoteException;
-    
+    public void electorVote(Election eleitoral, String cc)throws Exception;
 }

@@ -390,7 +390,7 @@ public class Menu extends javax.swing.JFrame {
             Date today = new Date();
             if(today.after(Global.remote.getElection().getDataI()) || today.equals(Global.remote.getElection().getDataI()) ){
                //the data is correct
-               if(Global.loggedP.getVoted()==true){
+               if(Global.remote.getElection().getElectorByCC(Global.loggedP.getCC()).getVoted()==true){
                 //already voted
                 JOptionPane.showMessageDialog(null, "Já utilizou o seu direito de votar", "Atenção", JOptionPane.WARNING_MESSAGE);
                 jButton2.setEnabled(false);
@@ -526,12 +526,15 @@ public class Menu extends javax.swing.JFrame {
                 java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }else{
-        if(Global.loggedP.getVoted()==true){
-                //already voted
-                jButton2.setEnabled(false);
-                jLabel5.setForeground(Color.red);
-                jLabel5.setText("Já Votou");
-        }
+            try {
+                if(Global.remote.getElection().getElectorByCC(Global.loggedP.getCC()).getVoted()==true){
+                    //already voted
+                    jButton2.setEnabled(false);
+                    jLabel5.setForeground(Color.red);
+                    jLabel5.setText("Já Votou");
+                }   } catch (RemoteException ex) {
+                java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_formWindowActivated
 

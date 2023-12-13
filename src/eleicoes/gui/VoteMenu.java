@@ -8,6 +8,7 @@ import client.Vote;
 import distributedMiner.utils.Converter;
 import eleicoes.lib.Global;
 import eleicoes.lib.Candidate;
+import eleicoes.lib.Election;
 import eleicoes.lib.Person;
 import eleicoes.lib.User;
 import eleicoes.utils.SecurityUtils;
@@ -143,7 +144,6 @@ public class VoteMenu extends javax.swing.JDialog {
                     String vote=buttonGroup1.getSelection().getActionCommand();
                     try {
                         Global.remote.getElection().addListVotes(vote);
-                        Global.remote.getElection().getElectorByCC(Global.loggedP.getCC()).setVoted(true);
                     } catch (RemoteException ex) {
                         Logger.getLogger(VoteMenu.class.getName()).log(Level.SEVERE, null, ex);
                     }                    
@@ -165,7 +165,9 @@ public class VoteMenu extends javax.swing.JDialog {
                     }
                     
                     try {
+                        
                         Global.remote.getElection().addVoteToBlockChain(v);
+                        Global.remote.electorVote(Global.remote.getElection(), Global.loggedP.getCC());
                         //Vote t = new Vote(Global.loggedP.getName(), vote, 1);
                         //Global.remote.addTransaction(v.toText());
                         JOptionPane.showMessageDialog(null, "Obrigado por votar "+Global.loggedP.getName()+"!", "Voto", JOptionPane.INFORMATION_MESSAGE);
