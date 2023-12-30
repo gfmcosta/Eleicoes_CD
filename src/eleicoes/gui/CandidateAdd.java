@@ -119,7 +119,7 @@ public class CandidateAdd extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Testes");
+        jButton2.setText("Adicionar Candidato - Rápido");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -133,8 +133,8 @@ public class CandidateAdd extends javax.swing.JDialog {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(103, 103, 103)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
@@ -225,16 +225,20 @@ public class CandidateAdd extends javax.swing.JDialog {
                 //add a new Candidate object with all informations
                 Candidate x = new Candidate(jTextField2.getText(), jTextField3.getText(), "/resources/"+jTextField4.getText());
                 // addVoteToBlockChain to the list
-                Global.eleitoral.addListCandidate(x);              
-                JOptionPane.showMessageDialog(null, "Candidato adicionado com sucesso.", "Eleitor", JOptionPane.INFORMATION_MESSAGE);
-                //variable to save jOptionPane response
-                int result = JOptionPane.showConfirmDialog(null, "Deseja adicionar um novo candidato?","Confirmar",JOptionPane.YES_NO_OPTION);
-                if (result==JOptionPane.YES_OPTION){
-                    dispose();
-                    new CandidateAdd(null, true).setVisible(true);
-                }else{
-                    dispose();
+                try{
+                    Global.eleitoral.addListCandidate(x);
+                    JOptionPane.showMessageDialog(null, "Candidato adicionado com sucesso.", "Eleitor", JOptionPane.INFORMATION_MESSAGE);
+                    //variable to save jOptionPane response
+                    int result = JOptionPane.showConfirmDialog(null, "Deseja adicionar um novo candidato?","Confirmar",JOptionPane.YES_NO_OPTION);
+                    if (result==JOptionPane.YES_OPTION){
+                        dispose();
+                        new CandidateAdd(null, true).setVisible(true);
+                    }else{
+                        dispose();
+                    }
+                }catch(Exception e ){
                 }
+                
             }
             
         }

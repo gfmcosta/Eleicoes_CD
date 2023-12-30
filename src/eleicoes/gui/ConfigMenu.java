@@ -189,7 +189,7 @@ public class ConfigMenu extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setText("Teste");
+        jButton4.setText("Iniciar Eleição - Rápido");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -236,7 +236,7 @@ public class ConfigMenu extends javax.swing.JDialog {
                 .addContainerGap(168, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -320,14 +320,20 @@ public class ConfigMenu extends javax.swing.JDialog {
             Date data2 = format.parse(jTextField3.getText());
             //verify if final date is after initial date or at the same day
             if( data2.after(data1) || data2.equals(data1)){
-            //final date is after initial date or at the same day
-            //add info to eleitoral 
-            Global.eleitoral.setName(jTextField1.getText());
-            Global.eleitoral.setDataI(data1);
-            Global.eleitoral.setDataF(data2);
-            Global.eleitoral.setImage(jTextField4.getText());
-            JOptionPane.showMessageDialog(null, "Eleição criada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
+                //final date is after initial date or at the same day
+                //add info to eleitoral 
+                Global.eleitoral.setName(jTextField1.getText());
+                Global.eleitoral.setDataI(data1);
+                Global.eleitoral.setDataF(data2);
+                Global.eleitoral.setImage(jTextField4.getText());
+                try {
+                    Global.remote.addElection(Global.eleitoral);
+                    JOptionPane.showMessageDialog(null, "Eleição criada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                } catch (Exception e) {
+                    System.out.println("Connect to server " + e);
+                    JOptionPane.showMessageDialog(null, "Erro. Contacte um administrador", "Exceção", JOptionPane.ERROR_MESSAGE);
+                }
             }else{
                //final date is not correct
                JOptionPane.showMessageDialog(null, "A data final não pode ser antes da data inicial", "Erro", JOptionPane.ERROR_MESSAGE);

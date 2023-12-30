@@ -35,17 +35,8 @@ public class LastBlock {
     }
 
     public Block getLastBlock() throws RemoteException {
-//        List<Block> lst = new ArrayList<>();
-//        try {
-//            lst.add(myNode.blockchain.getLast());
-//            for (RemoteInterface node : myNode.getNetwork()) {
-//                lst.add(node.getBlockchain().getLast());
-//            }
-//
-//        } catch (Exception e) {
-//        }
+        
         List blks = myNode.getLastBlock(new Date().getTime(), 0, 7);
-
         return (Block) new Histogram().getMostCommon(blks);
 
     }
