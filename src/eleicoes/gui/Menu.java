@@ -385,6 +385,8 @@ public class Menu extends javax.swing.JFrame {
         if(Global.remote.getElection().getName().equals("")){
             //is not created yet
             JOptionPane.showMessageDialog(null, "Ainda não foi criado nenhuma Eleição", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else if(Global.remote.getElection().isFinished()){
+            JOptionPane.showMessageDialog(null, "A Eleição já foi encerrada.", "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
             //election exist
             Date today = new Date();
@@ -516,8 +518,9 @@ public class Menu extends javax.swing.JFrame {
         // TODO addVoteToBlockChain your handling code here:
         if(Global.isAdmin==true){
             try {
-                if(Global.remote.getElection().getName().equals("")){
-                    //is not created
+                if(Global.remote.getElection().getName().equals("") || Global.remote.getElection().isFinished()==true){
+                    //is not created oe it was finished
+                    jButton6.setVisible(false);
                 }else{
                     jButton6.setVisible(true);
                     
@@ -541,8 +544,11 @@ public class Menu extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         
         try {
+            Election x = Global.remote.getElection();
+            x.setFinished(true);
+            Global.remote.synchonizeElection(x);
+            jButton6.setVisible(false);
             BlockChain blockchain = Global.remote.getBlockchain();
-            
             // Mapa para armazenar contagens de votos
             Map<String, Integer> contador = new HashMap<>();
             for(int i=1;i<blockchain.getChain().size();i++){

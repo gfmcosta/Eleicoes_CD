@@ -435,7 +435,7 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
 
     @Override
     public void synchonizeElection(Election eleitoral) throws RemoteException {
-        if (this.eleitoral.getElector().size() == eleitoral.getElector().size() && this.eleitoral.getCandidate().size() == eleitoral.getCandidate().size()) {
+        if (this.eleitoral.getElector().size() == eleitoral.getElector().size() && this.eleitoral.getCandidate().size() == eleitoral.getCandidate().size() && this.eleitoral.isFinished() == eleitoral.isFinished()) {
             return;
         }
         
