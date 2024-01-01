@@ -13,6 +13,25 @@
 //::                                                               (c)2022   ::
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //////////////////////////////////////////////////////////////////////////////
+
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+//::                                                                         ::
+//::     Gonçalo Filipe Martins da Costa                                     ::
+//::     e-mail: aluno23692@ipt.pt                                           ::
+//::                                                                         ::
+//::     João Miguel Rodrigues Ribeiro Gonçalves                             ::
+//::     e-mail: aluno23882@ipt.pt                                           ::
+//::                                                                         ::
+//::     I N S T I T U T O    P O L I T E C N I C O   D E   T O M A R        ::
+//::     Escola Superior de Tecnologia de Tomar                              ::
+//::                                                                         ::
+//::                                                                         ::
+//::     This software was edited with the purpose of investigate and        ::
+//::     learning.                                                           ::
+//::                                                                         ::
+//::                                                               (c)2024   ::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//////////////////////////////////////////////////////////////////////////////
 package eleicoes.utils;
 
 import eleicoes.remote.MiningListener;
@@ -25,25 +44,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created on 28/09/2022, 11:13:39
- *
- * @author IPT - computer
- * @version 1.0
+ * Classe responsável pela implementação do Miner P2P.
+ * 
+ * @author Gonçalo Costa
+ * @author João Gonçalves
  */
-
 public class MinerP2P {
 
-    //dados de minagem
+    // Dados de mineração
     String data;
-    //ticket para com números para testar
+    // Ticket com números para testar
     AtomicInteger ticket;
-    //noce que mina a mensagem
+    // Número que mina a mensagem (nonce)
     AtomicInteger nonce;
-    //listener do mineiro
+    // Listener do mineiro para notificar eventos de mineração
     MiningListener listener;
-    //array de thread para minar em paralelo
-    MinerTHR[] workers; // Array de threads
+    // Array de threads para minerar em paralelo
+    MinerTHR[] workers;
 
+    /**
+     * Construtor da classe MinerP2P.
+     * 
+     * @param listener Objeto para ouvir eventos de mineração.
+     */
     public MinerP2P(MiningListener listener) {
         this.ticket = new AtomicInteger(0);
         this.nonce = new AtomicInteger(0);
@@ -51,23 +74,36 @@ public class MinerP2P {
         this.listener = listener;
     }
 
-    public void startMining(String data, int dificulty) {
+    /**
+     * Inicia o processo de mineração.
+     * 
+     * @param data Dados a serem minerados.
+     * @param difficulty Dificuldade desejada para a mineração.
+     */
+    public void startMining(String data, int difficulty) {
+        // Número de cores do processador
         int numThreads = Runtime.getRuntime().availableProcessors();
         Random rnd = new Random();
-        //parar o mineiro se ainda estiver a minar
+        // Para o mineiro se ainda estiver a minerar
         stopMining(999);
-        //criar novos objetos partilhados
-        //começar num numero aleatório
+        // Cria novos objetos partilhados (AtomicInteger(+)
+        // Começa com um número aleatório
         ticket = new AtomicInteger(Math.abs(rnd.nextInt() + 1));
         nonce = new AtomicInteger(0);
-        //Criar o array de threads e colocar a correr
+        // Cria o array de threads e dá ordem de começar
         workers = new MinerTHR[numThreads];
         for (int i = 0; i < numThreads; i++) {
-            workers[i] = new MinerTHR(ticket, nonce, dificulty, data, listener);
+            workers[i] = new MinerTHR(ticket, nonce, difficulty, data, listener);
             workers[i].start();
         }
     }
+    
 
+     /**
+     * Para o processo de mineração.
+     * 
+     * @param number Número para parar o processo de mineração.
+     */
     public void stopMining(int number) {
         if (workers != null) {
             for (MinerTHR worker : workers) {
@@ -76,27 +112,47 @@ public class MinerP2P {
         }
     }
 
+    /**
+     * Obtém o valor do ticket atual.
+     * 
+     * @return Valor do ticket.
+     */
     public int getTicket() {
         return ticket.get();
     }
 
+    /**
+     * Obtém os dados a serem minerados.
+     * 
+     * @return Dados a serem minerados.
+     */
     public String getData() {
         return data;
     }
-
+    
+    /**
+     * Verifica se o mineiro está em execução.
+     * 
+     * @return True se estiver a minerar, false caso contrário.
+     */
     public boolean isMining() {
         return workers != null && nonce.get() == 0;
     }
 
+    /**
+     * Obtém o valor atual do nonce.
+     * 
+     * @return Valor do nonce.
+     */
     public int getNonce() {
         return nonce.get();
     }
 
     /**
-     * Espera que as threads executem terminem o trabalho e devolve o nonce
-     *
-     * @return
-     * @throws Exception
+     * Aguarda até que as threads terminem o trabalho e retorna o nonce encontrado.
+     * 
+     * @return Valor do nonce encontrado.
+     * @throws Exception Exceção lançada se não estiver a minerar.
      */
     public int waitToNonce() throws Exception {
         if (workers != null) {
@@ -109,57 +165,81 @@ public class MinerP2P {
         }
     }
 
-    //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    //:::::::::      THREAD         :::::::::::::::::::::::::::::::::
-    ///////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * Classe interna para representar cada thread de mineração.
+     */
     private class MinerTHR extends Thread {
 
         AtomicInteger myTicket;
         AtomicInteger myNonce;
-        int dificulty;
+        int difficulty;
         String myData;
         MiningListener listener;
 
-        public MinerTHR(AtomicInteger ticket, AtomicInteger nonce, int dificulty, String data, MiningListener listener) {
+        /**
+         * Construtor da classe interna MinerTHR.
+         * 
+         * @param ticket Ticket partilhado.
+         * @param nonce Nonce partilhado.
+         * @param difficulty Dificuldade desejada para a mineração.
+         * @param data Dados a serem minerados.
+         * @param listener Objeto para ouvir eventos de mineração.
+         */
+        public MinerTHR(AtomicInteger ticket, AtomicInteger nonce, int difficulty, String data, MiningListener listener) {
             this.myTicket = ticket;
             this.myNonce = nonce;
-            this.dificulty = dificulty;
+            this.difficulty = difficulty;
             this.myData = data;
             this.listener = listener;
         }
 
+        /**
+         * Método para parar a thread de mineração.
+         * 
+         * @param number Número para parar o processo de mineração.
+         */
         public void stop(int number) {
             myNonce.set(number);
             interrupt();
         }
 
+        /**
+         * Método principal que executa a lógica de mineração na thread.
+         */
         public void run() {
-            //String of zeros
-            String zeros = String.format("%0" + dificulty + "d", 0);
+            // String com zeros à esquerda, com base na dificuldade
+            String leadingZeros = String.format("%0" + difficulty + "d", 0);
             int number;
+            // Enquanto o nonce não foi encontrado
             while (myNonce.get() == 0) {
-                //calculate hash of block
+                // Calcula o hash do bloco usando o ticket atual
                 number = myTicket.getAndIncrement();
-                //:::::::::::::  L I S T E N E R  ::::::::::::::::::::::::::::::
+                // Notifica o ouvinte a cada 100 milissegundos durante a mineração
                 if (System.currentTimeMillis() % 100 == 0) {
                     listener.onMining(number);
                 }
+                // Obtém o hash da concatenação do número e dos dados
                 String hash = getHash(number + myData);
-                //Nounce found
-                if (hash.startsWith(zeros)) {
-                    //:::::::::::::  L I S T E N E R  ::::::::::::::::::::::::::::::
+                // Verifica se o nonce atende à dificuldade desejada
+                if (hash.startsWith(leadingZeros)) {
+                    // Notifica o ouvinte sobre a descoberta do nonce
                     listener.onNounceFound(number);
+                    // Define o nonce encontrado
                     myNonce.set(number);
                 }
             }
-            //:::::::::::::  L I S T E N E R  ::::::::::::::::::::::::::::::
+            // Notifica o ouvinte que parou a mineração
             listener.onStopMining(myNonce.get());
         }
     }
 
-    //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    //:::::::::      I N T E G R I T Y         :::::::::::::::::::::::::::::::::
-    ///////////////////////////////////////////////////////////////////////////
+    /**
+     * Método estático para calcular o hash SHA-256 de uma string.
+     * 
+     * @param data Dados a serem hashed.
+     * @return String que representa o hash.
+     */
     public static String getHash(String data) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

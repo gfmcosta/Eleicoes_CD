@@ -13,6 +13,25 @@
 //::                                                               (c)2021   ::
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //////////////////////////////////////////////////////////////////////////////
+
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+//::                                                                         ::
+//::     Gonçalo Filipe Martins da Costa                                     ::
+//::     e-mail: aluno23692@ipt.pt                                           ::
+//::                                                                         ::
+//::     João Miguel Rodrigues Ribeiro Gonçalves                             ::
+//::     e-mail: aluno23882@ipt.pt                                           ::
+//::                                                                         ::
+//::     I N S T I T U T O    P O L I T E C N I C O   D E   T O M A R        ::
+//::     Escola Superior de Tecnologia de Tomar                              ::
+//::                                                                         ::
+//::                                                                         ::
+//::     This software was edited with the purpose of investigate and        ::
+//::     learning.                                                           ::
+//::                                                                         ::
+//::                                                               (c)2024   ::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//////////////////////////////////////////////////////////////////////////////
 package eleicoes.gui;
 
 import eleicoes.vote.Vote;
@@ -39,7 +58,8 @@ import eleicoes.lib.Person;
 
 /**
  *
- * @author IPT
+ * @author Gonçalo Costa
+ * @author João Gonçalves
  */
 public class ServerMiner extends javax.swing.JFrame implements MiningListener {
 
@@ -729,6 +749,12 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
     private javax.swing.JTextArea txtTransaction;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Tratamento de exceção para eventos na interface.
+     * 
+     * @param title Título da exceção.
+     * @param ex Exceção recebida.
+     */
     @Override
     public void onException(String title, Exception ex) {
         //fazer log na gui
@@ -740,12 +766,23 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         Logger.getAnonymousLogger().log(Level.SEVERE, null, ex);
     }
 
+    /**
+     * Evento para exibir mensagens na interface.
+     * 
+     * @param title Título da mensagem.
+     * @param msg Conteúdo da mensagem.
+     */
     @Override
     public void onMessage(String title, String msg) {
         //fazer log da mensagem
         GuiUtils.addText(txtLog, title, msg, Color.GREEN, Color.WHITE);
     }
 
+    /**
+     * Evento acionado quando o servidor é iniciado.
+     * 
+     * @param address Endereço do servidor.
+     */
     @Override
     public void onStartServer(String adress) {
         EventQueue.invokeLater(() -> {
@@ -762,6 +799,12 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         });
     }
 
+    /**
+     * Evento acionado ao iniciar a mineração.
+     * 
+     * @param message Mensagem associada à mineração.
+     * @param zeros Número de zeros requeridos no hash.
+     */
     @Override
     public void onStartMining(String message, int zeros) {
         EventQueue.invokeLater(() -> {
@@ -775,6 +818,11 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         });
     }
 
+    /**
+     * Evento acionado ao parar a mineração.
+     * 
+     * @param nonce Valor do nonce encontrado.
+     */
     @Override
     public void onStopMining(int nonce) {
         EventQueue.invokeLater(() -> {
@@ -791,6 +839,11 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         });
     }
 
+    /**
+     * Evento acionado durante a mineração para mostrar o número atual.
+     * 
+     * @param number Número atual durante a mineração.
+     */
     @Override
     public void onMining(int number) {
         EventQueue.invokeLater(() -> {
@@ -801,6 +854,11 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
     //imagem de quem ganhou
     private final ImageIcon img = new ImageIcon(getClass().getResource("/resources/winner.gif"));
 
+    /**
+     * Evento acionado quando um nonce é encontrado durante a mineração.
+     * 
+     * @param nonce Valor do nonce encontrado.
+     */
     @Override
     public void onNounceFound(int nonce) {
         EventQueue.invokeLater(() -> {
@@ -824,6 +882,11 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         });
     }
 
+    /**
+     * Evento acionado ao adicionar um novo nó à rede.
+     * 
+     * @param node Nó a ser adicionado.
+     */
     @Override
     public void onAddNode(RemoteInterface node) {
         EventQueue.invokeLater(() -> {
@@ -842,6 +905,11 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
 
     }
 
+    /**
+     * Evento acionado ao atualizar as transações na interface.
+     * 
+     * @param transaction Transação a ser atualizada.
+     */
     @Override
     public void onUpdateTransactions(String transaction) {
         EventQueue.invokeLater(() -> {
@@ -863,6 +931,10 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         });
     }
 
+    
+    /**
+     * Evento acionado ao atualizar a blockchain na interface.
+     */
     @Override
     public void onUpdateBlockchain() {
         EventQueue.invokeLater(() -> {
@@ -883,14 +955,21 @@ public class ServerMiner extends javax.swing.JFrame implements MiningListener {
         });
     }
 
+    /**
+     * Evento acionado durante o processo de consenso.
+     * 
+     * @param title Título do evento de consenso.
+     * @param desc Descrição do evento de consenso.
+     */
     @Override
     public void onConsensus(String title, String desc) {
         GuiUtils.addText(txtLog, title, desc, Color.yellow, Color.ORANGE);
                 
      }
     
-    
-    
+    /**
+     * Evento acionado ao atualizar informações relacionadas à eleição.
+     */
     @Override
     public void onUpdateElection() {
         EventQueue.invokeLater(() -> {
